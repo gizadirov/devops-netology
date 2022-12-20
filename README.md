@@ -26,3 +26,5 @@ override.tf, override.tf.json - файлы с именем 'override.tf' и 'ove
 .terraformrc - файлы с расширением terraformrc
 
 terraform.rc - файл с именем '.terraformrc'
+
+new line
