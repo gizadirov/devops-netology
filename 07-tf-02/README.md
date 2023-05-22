@@ -173,9 +173,9 @@ vm_web_ip = "158.160.40.115"
 4. Проверьте terraform plan (изменений быть не должно).
 
 ### Ответ
-
-[vms_platform.tf](src/vms_platform.tf)  
+[variables.tf](src/variables.tf)  
 [locals.tf](src/locals.tf)  
+[vms_platform.tf](src/vms_platform.tf)  
 [main.tf](src/main.tf)
 
 ------
