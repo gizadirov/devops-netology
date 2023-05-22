@@ -11,10 +11,9 @@ https://console.cloud.yandex.ru/folders/<ваш cloud_id>/vpc/security-groups.
 ### Ответ
 
 1. Ознакомился.  
-2. Preview доступ:
+2. Preview доступ:  
 
-![](img/01.png)
-
+<img src="img/01.png" alt="security_groups" width="600" />
 
 ### Задание 1
 
@@ -33,7 +32,7 @@ https://console.cloud.yandex.ru/folders/<ваш cloud_id>/vpc/security-groups.
 Ошибка заключалась в том, что для ``platform_id = "standard-v1"`` и ``core_fraction = 5`` нельзя выделить instance с одним ядром ``cores = 1``, можно с двумя или четырьмя ``cores = 2 || 4``.  
 Параметры ```preemptible = true```(прерываемая машина) и ```core_fraction=5```(гарантированная доля CPU в процентах) могут пригодиться для экономии бюджета.  
 
-![](img/02.png)  
+<img src="img/02.png" alt="vm_web" width="600" />
 
 ```commandline
 timur@LAPTOP-D947D6IL:~/projects/devops-netology/07-tf-02/src$ ssh ubuntu@158.160.100.246
