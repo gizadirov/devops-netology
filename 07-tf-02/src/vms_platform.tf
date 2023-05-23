@@ -5,12 +5,6 @@ variable "vm_web_suffix" {
   default = "web"
 }
 
-variable "vm_web_name" {
-  type        = string
-  default     = "netology-develop-platform-web"
-  description = "Yandex compute instance name"
-}
-
 variable "vm_web_platform" {
   type        = string
   default     = "standard-v1"
@@ -44,12 +38,6 @@ variable "vm_web_nat" {
 variable "vm_db_suffix" {
   type    = string
   default = "db"
-}
-
-variable "vm_db_name" {
-  type        = string
-  default     = "netology-develop-platform-db"
-  description = "Yandex compute instance db name"
 }
 
 variable "vm_db_platform" {

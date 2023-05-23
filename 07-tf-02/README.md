@@ -67,8 +67,7 @@ ubuntu@fhmfp6s83rcnsjg3m47f:~$
 
 ### Ответ
 ```hcl
-### vpc_web vars
-variable "vpc_web_image_family" {
+variable "vpc_image_family" {
   type        = string
   default     = "ubuntu-2004-lts"
   description = "Yandex compute instance image family name"
@@ -113,6 +112,44 @@ variable "vpc_web_serial_port" {
   default     = 1
   description = "Yandex compute instance serial port"
 }
+
+variable "vpc_web_ssh_user" {
+  type        = string
+  default     = "ubuntu"
+  description = "Yandex compute instance ssh user"
+}
+
+data "yandex_compute_image" "ubuntu" {
+  family = var.vpc_image_family
+}
+
+resource "yandex_compute_instance" "platform" {
+  name        = var.vpc_web_name
+  platform_id = var.vpc_web_platform
+  resources {
+    cores         = var.vpc_web_cores
+    memory        = var.var.vpc_web_memory
+    core_fraction = var.vpc_web_core_fraction
+  }
+  boot_disk {
+    initialize_params {
+      image_id = data.yandex_compute_image.ubuntu.image_id
+    }
+  }
+  scheduling_policy {
+    preemptible = var.vpc_web_preemptible
+  }
+  network_interface {
+    subnet_id = yandex_vpc_subnet.develop.id
+    nat       = var.vpc_web_nat
+  }
+
+  metadata = {
+    serial-port-enable = var.vpc_web_serial_port
+    ssh-keys           = "${ var.vpc_web_ssh_user }:${ var.vms_ssh_root_key }"
+  }
+}
+
 ```
 ```commandline
 timur@LAPTOP-D947D6IL:~/projects/devops-netology/07-tf-02/src$ terraform plan
