@@ -5,12 +5,6 @@ variable "vm_web_suffix" {
   default = "web"
 }
 
-variable "vm_web_image_family" {
-  type        = string
-  default     = "ubuntu-2004-lts"
-  description = "Yandex compute instance image family name"
-}
-
 variable "vm_web_name" {
   type        = string
   default     = "netology-develop-platform-web"
@@ -50,12 +44,6 @@ variable "vm_web_nat" {
 variable "vm_db_suffix" {
   type    = string
   default = "db"
-}
-
-variable "vm_db_image_family" {
-  type        = string
-  default     = "ubuntu-2004-lts"
-  description = "Yandex compute instance db image family name"
 }
 
 variable "vm_db_name" {

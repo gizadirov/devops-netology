@@ -44,6 +44,12 @@ variable "vpc_platform" {
   description = "VPC platform"
 }
 
+variable "vpc_image_family" {
+  type        = string
+  default     = "ubuntu-2004-lts"
+  description = "Yandex compute instance image family name"
+}
+
 variable "vpc_serial_port_enable" {
   type    = number
   default = 1

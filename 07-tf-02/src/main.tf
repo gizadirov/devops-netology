@@ -10,7 +10,7 @@ resource "yandex_vpc_subnet" "develop" {
 }
 
 data "yandex_compute_image" "ubuntu" {
-  family = var.vm_web_image_family
+  family = var.vpc_image_family
 }
 
 ### vm_web instance
@@ -35,7 +35,7 @@ resource "yandex_compute_instance" "platform" {
     subnet_id = yandex_vpc_subnet.develop.id
     nat       = var.vm_web_nat
   }
-  metadata = local.vms_metadata
+  metadata = local.vpc_metadata
 }
 
 ### vm_db instance
@@ -61,5 +61,5 @@ resource "yandex_compute_instance" "platform1" {
     nat       = var.vm_db_nat
   }
   ### Вопрос. Почему с metadata в locals работает, а с resources = local.vm_db_resources нет?
-  metadata = local.vms_metadata
+  metadata = local.vpc_metadata
 }
