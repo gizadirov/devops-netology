@@ -48,6 +48,7 @@ resource "yandex_compute_instance" "web_storage_host" {
     subnet_id          = yandex_vpc_subnet.develop.id
     nat                = var.vm_web_nat
     security_group_ids = local.security_group_ids
+
   }
   metadata = local.vms_metadata
 }

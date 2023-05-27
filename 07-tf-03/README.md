@@ -158,5 +158,22 @@ timur@LAPTOP-D947D6IL:~/projects/devops-netology/07-tf-03/src$ terraform output 
 Для проверки работы уберите у ВМ внешние адреса. Этот вариант используется при работе через bastion сервер.
 Для зачета предоставьте код вместе с основной частью задания.
 
+### Ответ
+
+[**main.tf**](src/main.tf)  
+[**hosts.tftpl**](src/hosts.tftpl)  
 
 
+```commandline
+timur@LAPTOP-D947D6IL:~/projects/devops-netology/07-tf-03/src$ terraform apply -var="vm_db_nat=false"
+```
+```commandline
+#hosts.cfg
+[webservers]
+
+netology-development-platform-web-0 ansible_host=51.250.85.251
+netology-development-platform-web-1 ansible_host=51.250.93.22
+netology-development-platform-db-main ansible_host=10.0.1.20
+netology-development-platform-db-replica ansible_host=10.0.1.17
+netology-development-platform-web-storage ansible_host=51.250.8.176
+```
