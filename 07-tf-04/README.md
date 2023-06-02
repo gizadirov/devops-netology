@@ -60,8 +60,8 @@ module "vpc_dev" {
 ```
 ### Ответ
 [**main.tf**](src/main.tf)  
-[**vpc_dev module/main.tf**](src/vpc/main.tf)  
-[**vpc_dev module doc**](src/vpc/README.md)
+[**vpc/main.tf**](src/vpc/main.tf)  
+[**vpc module doc**](src/vpc/README.md)
 
 
 ### Задание 3

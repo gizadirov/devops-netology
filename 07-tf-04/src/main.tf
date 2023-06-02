@@ -1,21 +1,9 @@
-module "vpc_prod" {
-  source   = "./vpc"
-  env_name = "production"
-  vpc_name = "netology"
-  subnets = [
-    { zone = "ru-central1-a", cidr = "10.0.1.0/24" },
-    { zone = "ru-central1-b", cidr = "10.0.2.0/24" },
-    { zone = "ru-central1-c", cidr = "10.0.3.0/24" },
-  ]
-}
-
 module "vpc_dev" {
   source   = "./vpc"
-  env_name = "develop"
-  vpc_name = "netology"
-  subnets = [
-    { zone = "ru-central1-a", cidr = "10.0.1.0/24" },
-  ]
+  env_name = var.default_env
+  vpc_name = var.vpc_name
+  zone     = var.default_zone
+  cidr     = var.default_cidr
 }
 
 module "test-vm" {
@@ -23,7 +11,7 @@ module "test-vm" {
   env_name       = var.default_env
   network_id     = module.vpc_dev.vpc_id
   subnet_zones   = [var.default_zone]
-  subnet_ids     = module.vpc_dev.subnets_ids
+  subnet_ids     = [ module.vpc_dev.subnet_id ]
   instance_name  = "web"
   instance_count = 1
   image_family   = "ubuntu-2004-lts"
