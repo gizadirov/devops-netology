@@ -1,3 +1,5 @@
+### Задание 2
+/*
 variable "zone" {
   type        = string
   description = "https://cloud.yandex.ru/docs/overview/concepts/geo-scope"
@@ -5,6 +7,15 @@ variable "zone" {
 variable "cidr" {
   type        = string
   description = "https://cloud.yandex.ru/docs/vpc/operations/subnet-create"
+}
+*/
+
+variable "subnets" {
+  type = list(object({
+    zone = string,
+    cidr = string
+  }))
+  description = "Subnets list"
 }
 
 variable "vpc_name" {
@@ -16,3 +27,7 @@ variable "env_name" {
   type        = string
   description = "Environment"
 }
+
+
+
+

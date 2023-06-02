@@ -1,4 +1,24 @@
+module "vpc_prod" {
+  source   = "./vpc"
+  env_name = "production"
+  vpc_name = "netology"
+  subnets = [
+    { zone = "ru-central1-a", cidr = "10.0.1.0/24" },
+    { zone = "ru-central1-b", cidr = "10.0.2.0/24" },
+    { zone = "ru-central1-c", cidr = "10.0.3.0/24" },
+  ]
+}
+
 module "vpc_dev" {
+  source   = "./vpc"
+  env_name = "develop"
+  vpc_name = "netology"
+  subnets = [
+    { zone = "ru-central1-a", cidr = "10.0.1.0/24" },
+  ]
+}
+
+/*module "vpc_dev" {
   source   = "./vpc"
   env_name = var.default_env
   vpc_name = var.vpc_name
@@ -29,4 +49,4 @@ data "template_file" "cloudinit" {
     "ssh_key" = file("~/.ssh/id_ed25519.pub")
   }
 }
-
+*/

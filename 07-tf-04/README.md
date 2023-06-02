@@ -164,6 +164,19 @@ module "vpc_dev" {
 Предоставьте код, план выполнения, результат из консоли YC.
 
 ### Ответ
+```hcl
+resource "yandex_vpc_network" "vpc" {
+  name = "${var.vpc_name}_${var.env_name}_net"
+}
+
+resource "yandex_vpc_subnet" "subnets" {
+  for_each       = { for i, e in var.subnets : i => e }
+  name           = "${var.vpc_name}_${var.env_name}_${each.key}_subnet"
+  zone           = each.value.zone
+  network_id     = yandex_vpc_network.vpc.id
+  v4_cidr_blocks = [each.value.cidr]
+}
+```
 ```commandline
 timur@LAPTOP-D947D6IL:~/projects/devops-netology/07-tf-04/src$ terraform plan
 
@@ -255,6 +268,24 @@ Terraform will perform the following actions:
     }
 
 Plan: 6 to add, 0 to change, 0 to destroy.
+```
+
+```commandline
+timur@LAPTOP-D947D6IL:~/projects/devops-netology/07-tf-04/src$ yc vpc network list-subnets --name="netology_develop_net"
++----------------------+---------------------------+----------------------+----------------------+----------------+---------------+---------------+
+|          ID          |           NAME            |      FOLDER ID       |      NETWORK ID      | ROUTE TABLE ID |     ZONE      |     RANGE     |
++----------------------+---------------------------+----------------------+----------------------+----------------+---------------+---------------+
+| e9bhljen9mmpsf6njih3 | netology_develop_0_subnet | b1g8tnoqh3ieosnlgt8j | enpofvr5cu8jvce6hmik |                | ru-central1-a | [10.0.1.0/24] |
++----------------------+---------------------------+----------------------+----------------------+----------------+---------------+---------------+
+
+timur@LAPTOP-D947D6IL:~/projects/devops-netology/07-tf-04/src$ yc vpc network list-subnets --name="netology_production_net"
++----------------------+------------------------------+----------------------+----------------------+----------------+---------------+---------------+
+|          ID          |             NAME             |      FOLDER ID       |      NETWORK ID      | ROUTE TABLE ID |     ZONE      |     RANGE     |
++----------------------+------------------------------+----------------------+----------------------+----------------+---------------+---------------+
+| b0c3s1dlrlmh6d0vacg0 | netology_production_2_subnet | b1g8tnoqh3ieosnlgt8j | enpmko8trdef1d2m01u5 |                | ru-central1-c | [10.0.3.0/24] |
+| e2ljcvfqpt14i3ap3nqp | netology_production_1_subnet | b1g8tnoqh3ieosnlgt8j | enpmko8trdef1d2m01u5 |                | ru-central1-b | [10.0.2.0/24] |
+| e9blqh6sj5d8pqirj3fh | netology_production_0_subnet | b1g8tnoqh3ieosnlgt8j | enpmko8trdef1d2m01u5 |                | ru-central1-a | [10.0.1.0/24] |
++----------------------+------------------------------+----------------------+----------------------+----------------+---------------+---------------+
 ```
 ### Задание 5**
 
