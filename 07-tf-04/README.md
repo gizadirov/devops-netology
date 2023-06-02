@@ -10,7 +10,7 @@
 
 
 ### Ответ
-[**main.tf**](src/main.tf)  
+[**main.tf**](https://github.com/gizadirov/devops-netology/blob/237f292320b4f5f6838b665e6b169e94fecb029e/07-tf-04/src/main.tf)  
 [**cloud-init.yml**](src/cloud-init.yml)
 
 ```commandline
@@ -59,8 +59,8 @@ module "vpc_dev" {
 }
 ```
 ### Ответ
-[**main.tf**](src/main.tf)  
-[**vpc/main.tf**](src/vpc/main.tf)  
+[**main.tf**](https://github.com/gizadirov/devops-netology/blob/237f292320b4f5f6838b665e6b169e94fecb029e/07-tf-04/src/main.tf)  
+[**vpc/main.tf**](https://github.com/gizadirov/devops-netology/blob/237f292320b4f5f6838b665e6b169e94fecb029e/07-tf-04/src/vpc/main.tf)  
 [**vpc module doc**](src/vpc/README.md)
 
 
