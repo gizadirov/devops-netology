@@ -173,6 +173,7 @@ ansible.builtin.local          execute on controller
 ...
 ```
 Так как localhost является как ``control node``, так и  ``controller node``, подойдет ``ansible.builtin.local``
+
 10. В `prod.yml` добавьте новую группу хостов с именем  `local`, в ней разместите localhost с необходимым типом подключения.
 ### Ответ
 ```commandline
