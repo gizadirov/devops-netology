@@ -13,3 +13,8 @@ output "subnets_ids" {
   value       = [for k, v in yandex_vpc_subnet.subnets : v.id]
   description = "VPC subnets IDs"
 }
+
+output "subnets" {
+  value       = [for k, v in yandex_vpc_subnet.subnets : { id = v.id, zone = v.zone }]
+  description = "VPC subnets IDs"
+}

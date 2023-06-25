@@ -9,4 +9,5 @@ users:
 package_update: true
 package_upgrade: false
 packages:
- - nginx
+# - nginx
+ - mysql-client

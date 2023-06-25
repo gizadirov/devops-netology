@@ -29,5 +29,3 @@ variable "env_name" {
 }
 
 
-
-

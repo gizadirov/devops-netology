@@ -291,6 +291,243 @@ timur@LAPTOP-D947D6IL:~/projects/devops-netology/07-tf-04/src$ yc vpc network li
 4. 
 Предоставьте план выполнения и по-возможности результат. Сразу же удаляйте созданные ресурсы, так как кластер может стоить очень дорого! Используйте минимальную конфигурацию.
 
+### Ответ
+```commandline
+  + resource "yandex_mdb_mysql_cluster" "mysql" {
+      + allow_regeneration_host   = false
+      + backup_retain_period_days = (known after apply)
+      + created_at                = (known after apply)
+      + deletion_protection       = false
+      + environment               = "PRESTABLE"
+      + folder_id                 = (known after apply)
+      + health                    = (known after apply)
+      + host_group_ids            = (known after apply)
+      + id                        = (known after apply)
+      + mysql_config              = (known after apply)
+      + name                      = "example"
+      + network_id                = (known after apply)
+      + status                    = (known after apply)
+      + version                   = "8.0"
+
+      + host {
+          + assign_public_ip   = false
+          + fqdn               = (known after apply)
+          + replication_source = (known after apply)
+          + subnet_id          = (known after apply)
+          + zone               = "ru-central1-a"
+        }
+
+      + resources {
+          + disk_size          = 10
+          + disk_type_id       = "network-hdd"
+          + resource_preset_id = "s2.micro"
+        }
+    }
+
+  # module.m_mysql_db.yandex_mdb_mysql_database.db will be created
+  + resource "yandex_mdb_mysql_database" "db" {
+      + cluster_id = (known after apply)
+      + id         = (known after apply)
+      + name       = "test"
+    }
+
+  # module.m_mysql_db.yandex_mdb_mysql_user.db_user will be created
+  + resource "yandex_mdb_mysql_user" "db_user" {
+      + authentication_plugin = (known after apply)
+      + cluster_id            = (known after apply)
+      + global_permissions    = (known after apply)
+      + id                    = (known after apply)
+      + name                  = "app"
+      + password              = (sensitive value)
+
+      + permission {
+          + database_name = "test"
+          + roles         = [
+              + "ALL",
+            ]
+        }
+    }
+
+  # module.vpc_prod.yandex_vpc_network.vpc will be created
+  + resource "yandex_vpc_network" "vpc" {
+      + created_at                = (known after apply)
+      + default_security_group_id = (known after apply)
+      + folder_id                 = (known after apply)
+      + id                        = (known after apply)
+      + labels                    = (known after apply)
+      + name                      = "netology_production_net"
+      + subnet_ids                = (known after apply)
+    }
+
+  # module.vpc_prod.yandex_vpc_subnet.subnets["0"] will be created
+  + resource "yandex_vpc_subnet" "subnets" {
+      + created_at     = (known after apply)
+      + folder_id      = (known after apply)
+      + id             = (known after apply)
+      + labels         = (known after apply)
+      + name           = "netology_production_0_subnet"
+      + network_id     = (known after apply)
+      + v4_cidr_blocks = [
+          + "10.0.1.0/24",
+        ]
+      + v6_cidr_blocks = (known after apply)
+      + zone           = "ru-central1-a"
+    }
+
+  # module.vpc_prod.yandex_vpc_subnet.subnets["1"] will be created
+  + resource "yandex_vpc_subnet" "subnets" {
+      + created_at     = (known after apply)
+      + folder_id      = (known after apply)
+      + id             = (known after apply)
+      + labels         = (known after apply)
+      + name           = "netology_production_1_subnet"
+      + network_id     = (known after apply)
+      + v4_cidr_blocks = [
+          + "10.0.2.0/24",
+        ]
+      + v6_cidr_blocks = (known after apply)
+      + zone           = "ru-central1-b"
+    }
+
+  # module.vpc_prod.yandex_vpc_subnet.subnets["2"] will be created
+  + resource "yandex_vpc_subnet" "subnets" {
+      + created_at     = (known after apply)
+      + folder_id      = (known after apply)
+      + id             = (known after apply)
+      + labels         = (known after apply)
+      + name           = "netology_production_2_subnet"
+      + network_id     = (known after apply)
+      + v4_cidr_blocks = [
+          + "10.0.3.0/24",
+        ]
+      + v6_cidr_blocks = (known after apply)
+      + zone           = "ru-central1-c"
+    }
+
+Plan: 7 to add, 0 to change, 0 to destroy.
+```
+```commandline
+ECDSA key fingerprint is SHA256:REgSHeOZcHG6he4nXemMdBrKJT88T88Xuf4e2M+euro.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added '130.193.37.117' (ECDSA) to the list of known hosts.
+Welcome to Ubuntu 20.04.6 LTS (GNU/Linux 5.4.0-150-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+The programs included with the Ubuntu system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Ubuntu comes with ABSOLUTELY NO WARRANTY, to the extent permitted by
+applicable law.
+
+To run a command as administrator (user "root"), use "sudo <command>".
+See "man sudo_root" for details.
+
+ubuntu@develop-web-0:~$ mkdir --parents ~/.mysql && \
+> wget "https://storage.yandexcloud.net/cloud-certs/CA.pem" \
+>     --output-document ~/.mysql/root.crt && \
+> chmod 0600 ~/.mysql/root.crt
+--2023-06-05 20:10:27--  https://storage.yandexcloud.net/cloud-certs/CA.pem
+Resolving storage.yandexcloud.net (storage.yandexcloud.net)... 213.180.193.243, 2a02:6b8::1d9
+Connecting to storage.yandexcloud.net (storage.yandexcloud.net)|213.180.193.243|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 3579 (3.5K) [application/x-x509-ca-cert]
+Saving to: ‘/home/ubuntu/.mysql/root.crt’
+
+/home/ubuntu/.mysql/root.crt                 100%[=============================================================================================>]   3.50K  --.-KB/s    in 0s
+
+2023-06-05 20:10:27 (295 MB/s) - ‘/home/ubuntu/.mysql/root.crt’ saved [3579/3579]
+
+ubuntu@develop-web-0:~$ mysql --host=rc1a-snz4kr30s60cmb1y.mdb.yandexcloud.net \
+>       --port=3306 \
+>       --ssl-ca=~/.mysql/root.crt \
+>       --ssl-mode=VERIFY_IDENTITY \
+>       --user=app \
+>       --password \
+>       test
+Enter password:
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 902
+Server version: 8.0.25-15 Percona Server (GPL), Revision 7df6366
+
+Copyright (c) 2000, 2023, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| test               |
++--------------------+
+2 rows in set (0.00 sec)
+```
+```commandline
+timur@LAPTOP-D947D6IL:~/projects/devops-netology/07-tf-04/src$ terraform apply -var="mysql_cluster_ha=true"
+data.template_file.cloudinit: Read complete after 0s [id=8d5f793a73b49a2ce90aa3e03fd864d146bbf1b85426653f7336fd84a27c998f]
+module.test-vm.data.yandex_compute_image.my_image: Reading...
+module.vpc_prod.yandex_vpc_network.vpc: Refreshing state... [id=enpih5ln8mq3b5c764e8]
+module.test-vm.data.yandex_compute_image.my_image: Read complete after 1s [id=fd83vhe8fsr4pe98v6oj]
+module.vpc_prod.yandex_vpc_subnet.subnets["2"]: Refreshing state... [id=b0c6b7l6rjes13lh5439]
+module.vpc_prod.yandex_vpc_subnet.subnets["0"]: Refreshing state... [id=e9b8ek3hhom2lsf7fah3]
+module.vpc_prod.yandex_vpc_subnet.subnets["1"]: Refreshing state... [id=e2l77fgfc9cfdgq0q180]
+module.m_mysql_cluster.yandex_mdb_mysql_cluster.mysql: Refreshing state... [id=c9qcs09v5f341ib93pli]
+module.test-vm.yandex_compute_instance.vm[0]: Refreshing state... [id=fhmog2im9umkp2jtnl47]
+module.m_mysql_db.yandex_mdb_mysql_database.db: Refreshing state... [id=c9qcs09v5f341ib93pli:test]
+module.m_mysql_db.yandex_mdb_mysql_user.db_user: Refreshing state... [id=c9qcs09v5f341ib93pli:app]
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+  ~ update in-place
+
+Terraform will perform the following actions:
+
+  # module.m_mysql_cluster.yandex_mdb_mysql_cluster.mysql will be updated in-place
+  ~ resource "yandex_mdb_mysql_cluster" "mysql" {
+        id                        = "c9qcs09v5f341ib93pli"
+        name                      = "example"
+        # (14 unchanged attributes hidden)
+
+      + host {
+          + assign_public_ip = false
+          + subnet_id        = "e2l77fgfc9cfdgq0q180"
+          + zone             = "ru-central1-b"
+        }
+      + host {
+          + assign_public_ip = false
+          + subnet_id        = "b0c6b7l6rjes13lh5439"
+          + zone             = "ru-central1-c"
+        }
+
+        # (6 unchanged blocks hidden)
+    }
+
+Plan: 0 to add, 1 to change, 0 to destroy.
+```
+```commandline
+timur@LAPTOP-D947D6IL:~/projects/devops-netology/07-tf-04/src$ yc managed-mysql cluster list
++----------------------+---------+---------------------+--------+---------+
+|          ID          |  NAME   |     CREATED AT      | HEALTH | STATUS  |
++----------------------+---------+---------------------+--------+---------+
+| c9qcs09v5f341ib93pli | example | 2023-06-05 19:16:58 | ALIVE  | RUNNING |
++----------------------+---------+---------------------+--------+---------+
+
+timur@LAPTOP-D947D6IL:~/projects/devops-netology/07-tf-04/src$ yc managed-mysql hosts list --cluster-id=c9qcs09v5f341ib93pli
++-------------------------------------------+----------------------+---------+--------+---------------+-----------+--------------------+----------+-----------------+
+|                   NAME                    |      CLUSTER ID      |  ROLE   | HEALTH |    ZONE ID    | PUBLIC IP | REPLICATION SOURCE | PRIORITY | BACKUP PRIORITY |
++-------------------------------------------+----------------------+---------+--------+---------------+-----------+--------------------+----------+-----------------+
+| rc1a-snz4kr30s60cmb1y.mdb.yandexcloud.net | c9qcs09v5f341ib93pli | MASTER  | ALIVE  | ru-central1-a | false     |                    |        0 |               0 |
+| rc1b-ijk6d8vsmwbcj0hn.mdb.yandexcloud.net | c9qcs09v5f341ib93pli | REPLICA | ALIVE  | ru-central1-b | false     |                    |        0 |               0 |
+| rc1c-dsi4af6548ctdn4x.mdb.yandexcloud.net | c9qcs09v5f341ib93pli | REPLICA | ALIVE  | ru-central1-c | false     |                    |        0 |               0 |
++-------------------------------------------+----------------------+---------+--------+---------------+-----------+--------------------+----------+-----------------+
+```
 ### Задание 6***  
 
 1. Разверните у себя локально vault, используя docker-compose.yml в проекте.
@@ -314,11 +551,22 @@ output "vault_example" {
  value = "${nonsensitive(data.vault_generic_secret.vault_example.data)}"
 } 
 
-можно обратится не к словарю, а конкретному ключу.
+можно обратится не к словарю, а к конкретному ключу.
 terraform console: >nonsensitive(data.vault_generic_secret.vault_example.data.<имя ключа в секрете>)
 ```
 5. Попробуйте разобраться в документации и записать новый секрет в vault с помощью terraform. 
 
+### Ответ
+```commandline
+timur@LAPTOP-D947D6IL:~/projects/devops-netology/07-tf-04/src$ terraform apply
+...
+Outputs:
+
+vault_example = tomap({
+  "test" = "congrats!"
+})
+vault_my_secret = "{\"foo\":\"bar\",\"zip\":\"zap\"}"
+```
 
 
 

@@ -20,31 +20,18 @@ variable "default_zone" {
   description = "https://cloud.yandex.ru/docs/overview/concepts/geo-scope"
 }
 variable "default_cidr" {
-  type        = string
-  default     = "10.0.1.0/24"
+  type        = list(string)
+  default     = ["10.0.1.0/24"]
   description = "https://cloud.yandex.ru/docs/vpc/operations/subnet-create"
 }
 
 variable "vpc_name" {
   type        = string
-  default     = "netology"
+  default     = "develop"
   description = "VPC network&subnet name"
 }
 
-variable "default_env" {
-  type        = string
-  default     = "develop"
-  description = "Environment"
+variable "public_key" {
+  type    = string
+  default = ""
 }
-
-variable "mysql_cluster_ha" {
-  type    = bool
-  default = false
-}
-
-
-
-
-
-
-
