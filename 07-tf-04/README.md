@@ -281,7 +281,6 @@ timur@LAPTOP-D947D6IL:~/projects/devops-netology/07-tf-04/src$ yc vpc network li
 | e9blqh6sj5d8pqirj3fh | netology_production_0_subnet | b1g8tnoqh3ieosnlgt8j | enpmko8trdef1d2m01u5 |                | ru-central1-a | [10.0.1.0/24] |
 +----------------------+------------------------------+----------------------+----------------------+----------------+---------------+---------------+
 ```
-### Остальные задания сдам в течение трех дней!
 
 ### Задание 5**
 
