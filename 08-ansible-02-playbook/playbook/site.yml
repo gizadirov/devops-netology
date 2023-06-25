@@ -41,6 +41,7 @@
   handlers:
     - name: Start Vector service
       become: true
+      become_method: su
       ansible.builtin.service:
         name: vector
         state: restarted
@@ -51,11 +52,13 @@
         dest: "./vector-{{ vector_version }}-1.x86_64.rpm"
     - name: Vector | Install packages
       become: true
+      become_method: su
       ansible.builtin.yum:
         name: "./vector-{{ vector_version }}-1.x86_64.rpm"
         disable_gpg_check: true
     - name: Vector | Apply template
       become: true
+      become_method: su
       ansible.builtin.template:
         src: vector.yml.j2
         dest: "{{ vector_config_dir }}/vector.yml"
@@ -65,6 +68,7 @@
         validate: vector validate --no-environment --config-yaml %s
     - name: Vector | change systemd unit
       become: true
+      become_method: su
       ansible.builtin.template:
         src: vector.service.j2
         dest: /usr/lib/systemd/system/vector.service

@@ -30,6 +30,7 @@ Play "Install Clickhouse" применяется на группу хостов 
 handlers:
     - name: Start clickhouse service
       become: true
+      become_method: su
       ansible.builtin.service:
         name: clickhouse-server
         state: restarted
@@ -50,6 +51,7 @@ Play "Install Vector" применяется на группу хостов "Vec
   handlers:
     - name: Start Vector service
       become: true
+      become_method: su
       ansible.builtin.service:
         name: vector
         state: restarted
