@@ -86,6 +86,11 @@
       ansible.builtin.yum:
         name: git
         state: present
+    - name: Lighhouse | Install epel-release repo
+      become: true
+      ansible.builtin.yum:
+        name: epel-release
+        state: present
     - name: Lighhouse | Install nginx
       become: true
       ansible.builtin.yum:
