@@ -14,9 +14,9 @@
 
 ## Inventory файл
 
-Группа "clickhouse" состоит из 1 хоста `centos7_1` в docker
+Группа "clickhouse" состоит из 1 хоста `centos7_1` в docker `docker run -d --name centos7_1 --privileged=true centos:7 /usr/sbin/init`
 
-Группа "vector" состоит из 1 хоста `centos7_2` в docker
+Группа "vector" состоит из 1 хоста `centos7_2` в docker `docker run -d --name centos7_2 --privileged=true centos:7 /usr/sbin/init`
 
 ## Playbook
 
