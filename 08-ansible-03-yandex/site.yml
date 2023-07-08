@@ -72,7 +72,9 @@
         group: "{{ ansible_user_gid }}"
         backup: true
       notify: Start Vector service
-- name: Install lighthouse
+- name: Install Lighthouse
+  tags:
+    - lh
   hosts: lighthouse
   handlers:
     - name: Nginx reload
@@ -104,10 +106,30 @@
         mode: 0644
   tasks:
     - name: Lighthouse | Clone repository
+      become: true
       ansible.builtin.git:
         repo: "{{ lighthouse_url }}"
         dest: "{{ lighthouse_dir }}"
+        #force: true    
         version: master
+    #- name: Lighthouse | chown folder for nginx
+    #  become: true
+    #  file:
+    #    path: "{{ lighthouse_dir }}"
+    #    owner: "{{ lighthouse_nginx_user }}"
+    #    group: "{{ lighthouse_nginx_user }}"
+    #    recurse: true
+    #    state: directory
+    #    mode: 0755
+    #- name: Lighthouse | chown files for nginx
+    #  become: true
+    #  file:
+    #    path: "{{ lighthouse_dir }}/"
+    #    owner: "{{ lighthouse_nginx_user }}"
+    #    group: "{{ lighthouse_nginx_user }}"
+    #    recurse: true
+    #    state: file
+    #    mode: 0644
     - name: Lighthouse | Apply config
       become: true
       ansible.builtin.template:
