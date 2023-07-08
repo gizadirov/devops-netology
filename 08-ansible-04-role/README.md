@@ -1,46 +1,102 @@
 # Домашнее задание к занятию 4 «Работа с roles»
 
-## Подготовка к выполнению
+Данный плейбук предназначен для установки `Clickhouse`, `Vector` и `Lighthouse` на хосты, указанные в `inventory` файле.
 
-1. * Необязательно. Познакомьтесь с [LightHouse](https://youtu.be/ymlrNlaHzIY?t=929).
-2. Создайте два пустых публичных репозитория в любом своём проекте: vector-role и lighthouse-role.
-3. Добавьте публичную часть своего ключа к своему профилю на GitHub.
+## group_vars
 
-## Основная часть
+| Переменная  | Назначение  |
+|:---|:---|
+| `clickhouse_version` | версия `Clickhouse` |
+| `clickhouse_packages` | `RPM` пакеты `Clickhouse`, которые необходимо скачать |
+| `vector_url` | URL адрес для скачивания `RPM` пакетов `Vector` |
+| `vector_version` | версия `Vector` |
+| `vector_home` | каталог для скачивания `RPM` пакетов `Vector` |
+| `lighthouse_url` | ссылка на репозиторий `Lighthouse` |
+| `lighthouse_dir` | каталог для файлов `Lighthouse` |
+| `lighthouse_nginx_user` | пользователь, из-под которого будет работать `Nginx`. Для упрощения процесса на тестовом стенде используем root пользователя|
 
-Ваша цель — разбить ваш playbook на отдельные roles. 
+## Inventory файл
 
-Задача — сделать roles для ClickHouse, Vector и LightHouse и написать playbook для использования этих ролей. 
+Группа "clickhouse" состоит из 1 хоста `clickhouse-01`
 
-Ожидаемый результат — существуют три ваших репозитория: два с roles и один с playbook.
+Группа "vector" состоит из 1 хоста `vector-01`
 
-**Что нужно сделать**
+Группа "vector" состоит из 1 хоста `lighthouse-01`
 
-1. Создайте в старой версии playbook файл `requirements.yml` и заполните его содержимым:
+## Playbook
 
-   ```yaml
-   ---
-     - src: git@github.com:AlexeySetevoi/ansible-clickhouse.git
-       scm: git
-       version: "1.11.0"
-       name: clickhouse 
-   ```
+Playbook состоит из 3 `play`.
 
-2. При помощи `ansible-galaxy` скачайте себе эту роль.
-3. Создайте новый каталог с ролью при помощи `ansible-galaxy role init vector-role`.
-4. На основе tasks из старого playbook заполните новую role. Разнесите переменные между `vars` и `default`. 
-5. Перенести нужные шаблоны конфигов в `templates`.
-6. Опишите в `README.md` обе роли и их параметры.
-7. Повторите шаги 3–6 для LightHouse. Помните, что одна роль должна настраивать один продукт.
-8. Выложите все roles в репозитории. Проставьте теги, используя семантическую нумерацию. Добавьте roles в `requirements.yml` в playbook.
-9. Переработайте playbook на использование roles. Не забудьте про зависимости LightHouse и возможности совмещения `roles` с `tasks`.
-10. Выложите playbook в репозиторий.
-11. В ответе дайте ссылки на оба репозитория с roles и одну ссылку на репозиторий с playbook.
+Play "Install Clickhouse" применяется на группу хостов "Clickhouse" и предназначен для установки и запуска `Clickhouse`
 
----
+Объявляем `handler` для запуска `clickhouse-server`.
 
-### Как оформить решение задания
+```yaml
+handlers:
+    - name: Start clickhouse service
+      become: true
+      ansible.builtin.service:
+        name: clickhouse-server
+        state: restarted
+```
 
-Выполненное домашнее задание пришлите в виде ссылки на .md-файл в вашем репозитории.
+| Имя таска | Описание |
+|--------------|---------|
+| `Get clickhouse distrib` | Скачивание `RPM` пакетов. Используется цикл с перменными `clickhouse_packages`. Так как не у всех пакетов есть `noarch` версии, используем перехват ошибки `rescue` |
+| `Install clickhouse packages` | Установка `RPM` пакетов. Используем `disable_gpg_check: true` для отключения проверки GPG подписи пакетов. В `notify` указываем, что данный таск требует запуск handler `Start clickhouse service` |
+| `Flush handlers` | Форсируем применение handler `Start clickhouse service`. Это необходимо для того, чтобы handler выполнился на текущем этапе, а не по завершению тасок. Если его не запустить сейчас, то сервис не будет запущен и следующий таск завершится с ошибкой |
+| `Create database` | Создаем в `Clickhouse` БД с названием "logs". Также прописываем условия, при которых таск будет иметь состояние `failed` и `changed` |
 
----
+Play "Install Vector" применяется на группу хостов "Vector" и предназначен для установки и запуска `Vector`
+
+Объявляем `handler` для запуска `vector`.
+
+```yaml
+  handlers:
+    - name: Start Vector service
+      become: true
+      ansible.builtin.service:
+        name: vector
+        state: restarted
+```
+
+| Имя таска | Описание |
+|--------------|---------|
+| `Download packages` | Скачивание `RPM` пакетов в текущую директорию пользователя |
+| `Install packages` | Установка `RPM` пакетов. Используем `disable_gpg_check: true` для отключения проверки GPG подписи пакетов |
+| `Apply template` | Применяем шаблон конфига `vector`. Здесь мы задаем путь конфига. Владельцем назначаем текущего пользователя `ansible`. После применения запускаем валидацию конфига |
+| `change systemd unit` | Изменяем модуль службы `vector`. После этого указываем handler для старта службы `vector` |
+
+Play "Install lighthouse" применяется на группу хостов "lighthouse" и предназначен для установки и запуска `lighthouse`
+
+Объявляем `handler` для перезапуска `Nginx`.
+
+```yaml
+ handlers:
+    - name: Nginx reload
+      become: true
+      ansible.builtin.service:
+        name: nginx
+        state: restarted
+```
+| Имя pretask | Описание |
+|--------------|---------|
+| `Install git` | Устанавливаем `git` |
+| `Install nginx` | Устанавливаем `Nginx` |
+| `Apply nginx config` | Применяем конфиг `Nginx`. |
+
+| Имя таска | Описание |
+|--------------|---------|
+| `Clone repository` | Клонируем репозиторий `lighthouse` из ветки `master` |
+| `Apply config` | Применяем конфиг `Nginx` для `lighthouse`. После этого перезапускаем `nginx` для применения изменений |
+
+
+## Template
+
+Шаблон "vector.service.j2" используется для изменения модуля службы `vector`. В нем мы определяем строку запуска `vector`. Также указываем, что unit должен быть запущен под текущим пользователем `ansible`
+
+Шаблон "vector.yml.j2" используется для настройки конфига `vector`. В нем мы указываем, что конфиг файл находится в переменной "vector_config" и его надо преобразовать в `YAML`.
+
+Шаблон "nginx.conf.j2" используется для первичной настройки `nginx`. Мы задаем пользователя для работы `nginx` и удаляем настройки root директории по умолчанию.
+
+Шаблон "lighthouse_nginx.conf.j2" настраивает `nginx` на работу с `lighthouse`. В нем прописываем порт 80, root директорию и index страницу.
