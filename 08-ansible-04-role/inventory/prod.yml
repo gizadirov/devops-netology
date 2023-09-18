@@ -2,15 +2,18 @@
 clickhouse:
   hosts:
     clickhouse-01:
-      ansible_host: 158.160.58.55
-      #ansible_user: centos
+      ansible_host: centos
+      ansible_connection: docker
+      ansible_become_method: su
 vector:
   hosts:
     vector-01:
-      ansible_host: 158.160.38.56
-      #ansible_user: centos
+      ansible_host: centos
+      ansible_connection: docker
+      ansible_become_method: su
 lighthouse:
   hosts:
     lighthouse-01:
-      ansible_host: 51.250.93.171
-      #ansible_user: centos
+      ansible_host: centos
+      ansible_connection: docker
+      ansible_become_method: su
