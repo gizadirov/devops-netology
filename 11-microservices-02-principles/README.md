@@ -140,35 +140,35 @@ http {
 			}
 			location /v1/user/(.*) {
 				if ($request_method != GET) {
-                    return 405;
-        		}
+                                    return 405;
+        		        }
 				auth_request /v1/token/validation;
 				proxy_pass http://minio/$1;
 			}
 			location /v1/upload {
 				if ($request_method != POST) {
-                    return 405;
-        		}
+                                    return 405;
+        		        }
 				auth_request /v1/token/validation;
 				proxy_pass http://uploader;
 			}
 			location /v1/user {
 				if ($request_method != GET) {
-                    return 405;
-        		}
+                                    return 405;
+        		        }
 				auth_request /v1/token/validation;
 				proxy_pass http://security;
 			}
 			location /v1/token {
 				if ($request_method != POST) {
-                    return 405;
-        		}
+                                    return 405;
+        		        }
 				proxy_pass http://security;
 			}
 			location /v1/register {
 				if ($request_method != POST) {
-                    return 405;
-        		}
+                                    return 405;
+        		        }
 				proxy_pass http://security/v1/user/;
 			}
 			
