@@ -134,9 +134,9 @@ http {
 		listen 8080;
 		server_name localhost;
 		location /v1/ {
-			location  /v1/token/validation {
-    			#internal;
-    			proxy_pass http://security;
+			location /v1/token/validation {
+    			        #internal;
+    			        proxy_pass http://security;
 			}
 			location /v1/user/(.*) {
 				if ($request_method != GET) {
