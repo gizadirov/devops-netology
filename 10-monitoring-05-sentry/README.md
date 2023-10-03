@@ -57,10 +57,25 @@ Free Cloud account имеет ограничения:
 2. Поэкспериментируйте с различными передаваемыми параметрами, но помните об ограничениях Free учётной записи Cloud Sentry.
 3. В качестве решения задания пришлите скриншот меню issues вашего проекта и пример кода подключения sentry sdk/отсылки событий.
 
----
+## Ответ
 
-### Как оформить решение задания
+```python
+import sentry_sdk
 
-Выполненное домашнее задание пришлите в виде ссылки на .md-файл в вашем репозитории.
+sentry_sdk.init(
+    dsn="https://76cf03e6d9c778879292cbe2a8c1d062@o4505983032229888.ingest.sentry.io/4505983057592320",
+    traces_sample_rate=1.0,
+    profiles_sample_rate=1.0,
+)
 
----
+event = {
+    "message": "Something happend",
+    "level": "warn",
+    "extra": {
+        "additional_info": "This is some additional information"
+    }
+}
+
+sentry_sdk.capture_event(event)
+```
+<img src="4.png" width=800 />  
