@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: pv-vol-nfs-test
+  name: pv-nfs-test
   namespace: lesson6
 spec:
   replicas: 1

@@ -4,7 +4,7 @@ metadata:
   name: pvc-nfs
   namespace: lesson6
 spec:
-  storageClassName: nfs
+  storageClassName: "nfs"
   accessModes:
   - ReadWriteOnce
   resources:

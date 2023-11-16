@@ -1,13 +1,5 @@
 # Домашнее задание к занятию «Хранение в K8s. Часть 2»
 
-
-### Дополнительные материалы для выполнения задания
-
-1. [Инструкция по установке NFS в MicroK8S](https://microk8s.io/docs/nfs). 
-2. [Описание Persistent Volumes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/). 
-3. [Описание динамического провижининга](https://kubernetes.io/docs/concepts/storage/dynamic-provisioning/). 
-4. [Описание Multitool](https://github.com/wbitt/Network-MultiTool).
-
 ------
 
 ### Задание 1
@@ -101,6 +93,12 @@ file.txt
 
 ```
 
+После удаления pvc pv перешел в состояние Failed, т.к. для делитера (reclaim policy = Delete) host_path не предусмотрено автоматического удаления, если биндинг не в папку /tmp. 
+
+После удаления pv файл остался на своем месте, так как удаление объекта Persistent Volume не влияет на выделенные ранее тома.
+Если попытаться удалить pv раньше, чем pvc, то он перейдет в состояние Terminating и будет ждать удаления pvc.
+
+
 ------
 
 ### Задание 2
@@ -123,6 +121,27 @@ file.txt
 timur@LAPTOP-D947D6IL:~/12-k8s-2_2$ kubectl get sc
 NAME   PROVISIONER                            RECLAIMPOLICY   VOLUMEBINDINGMODE   ALLOWVOLUMEEXPANSION   AGE
 nfs    cluster.local/nfs-server-provisioner   Delete          Immediate           true                   2m2s
+
+timur@LAPTOP-D947D6IL:~/12-k8s-2_2$ kubectl apply -f pvc_2.yaml
+persistentvolumeclaim/pvc-nfs created
+
+timur@LAPTOP-D947D6IL:~/12-k8s-2_2$ kubectl apply -f deployment_2.yaml
+deployment.apps/pv-nfs-test created
+
+timur@LAPTOP-D947D6IL:~/12-k8s-2_2$ kubectl get pvc -n lesson6
+NAME      STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   AGE
+pvc-nfs   Bound    pvc-628446a3-1186-41dc-9b22-2fff872b4182   1Gi        RWO            nfs            39m
+
+timur@LAPTOP-D947D6IL:~/12-k8s-2_2$ kubectl get po -n lesson6
+NAME                          READY   STATUS    RESTARTS   AGE
+pv-nfs-test-8d479cc6d-6547j   1/1     Running   0          32s
+
+timur@LAPTOP-D947D6IL:~/12-k8s-2_2$ kubectl exec --stdin --tty pv-nfs-test-8d479cc6d-6547j -n lesson6 -- sh  
+/ # echo 123 > /in/file.txt
+/ # cat /in/file.txt
+123
+/ # exit
+
 ```
 
 ------
