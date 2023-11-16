@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pv-vol-test
+  namespace: lesson6
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pv-vol-test
+  template:
+    metadata:
+      labels:
+        app: pv-vol-test
+    spec:
+      containers:
+      - name: busybox
+        image: busybox
+        command: ['sh', '-c', 'while true; do echo `date` >> /out/file.txt; sleep 5; done']
+        volumeMounts:
+        - name: vol
+          mountPath: /out
+      - name: multitool
+        image: wbitt/network-multitool
+        volumeMounts:
+        - name: vol
+          mountPath: /in
+      volumes:
+      - name: vol
+        persistentVolumeClaim:
+          claimName: pvc-manual
