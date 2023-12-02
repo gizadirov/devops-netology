@@ -1,0 +1,459 @@
+(.venv) timur@LAPTOP-D947D6IL:~/devops-netology/08-ansible-05-testing/ansible/roles/ansible-clickhouse$ molecule test -s centos_7
+INFO     centos_7 scenario test matrix: dependency, lint, cleanup, destroy, syntax, create, prepare, converge, idempotence, side_effect, verify, cleanup, destroy
+INFO     Performing prerun...
+INFO     Set ANSIBLE_LIBRARY=/home/timur/.cache/ansible-compat/b9a93c/modules:/home/timur/.ansible/plugins/modules:/usr/share/ansible/plugins/modules
+INFO     Set ANSIBLE_COLLECTIONS_PATH=/home/timur/.cache/ansible-compat/b9a93c/collections:/home/timur/.ansible/collections:/usr/share/ansible/collections
+INFO     Set ANSIBLE_ROLES_PATH=/home/timur/.cache/ansible-compat/b9a93c/roles:/home/timur/.ansible/roles:/usr/share/ansible/roles:/etc/ansible/roles
+INFO     Inventory ~/devops-netology/08-ansible-05-testing/ansible/roles/ansible-clickhouse/molecule/centos_7/../resources/inventory/hosts.yml linked to /home/timur/.cache/molecule/ansible-clickhouse/centos_7/inventory/hosts
+INFO     Inventory ~/devops-netology/08-ansible-05-testing/ansible/roles/ansible-clickhouse/molecule/centos_7/../resources/inventory/group_vars/ linked to /home/timur/.cache/molecule/ansible-clickhouse/centos_7/inventory/group_vars
+INFO     Inventory ~/devops-netology/08-ansible-05-testing/ansible/roles/ansible-clickhouse/molecule/centos_7/../resources/inventory/host_vars/ linked to /home/timur/.cache/molecule/ansible-clickhouse/centos_7/inventory/host_vars
+INFO     Running centos_7 > dependency
+WARNING  Skipping, missing the requirements file.
+WARNING  Skipping, missing the requirements file.
+INFO     Inventory ~/devops-netology/08-ansible-05-testing/ansible/roles/ansible-clickhouse/molecule/centos_7/../resources/inventory/hosts.yml linked to /home/timur/.cache/molecule/ansible-clickhouse/centos_7/inventory/hosts
+INFO     Inventory ~/devops-netology/08-ansible-05-testing/ansible/roles/ansible-clickhouse/molecule/centos_7/../resources/inventory/group_vars/ linked to /home/timur/.cache/molecule/ansible-clickhouse/centos_7/inventory/group_vars
+INFO     Inventory ~/devops-netology/08-ansible-05-testing/ansible/roles/ansible-clickhouse/molecule/centos_7/../resources/inventory/host_vars/ linked to /home/timur/.cache/molecule/ansible-clickhouse/centos_7/inventory/host_vars
+INFO     Running centos_7 > lint
+COMMAND: yamllint .
+ansible-lint
+flake8
+
+WARNING  Listing 81 violation(s) that are fatal
+fqcn[action-core]: Use FQCN for builtin module actions (set_fact).
+handlers/main.yml:3 Use `ansible.builtin.set_fact` or `ansible.legacy.set_fact` instead.
+
+schema[meta]: $.galaxy_info.min_ansible_version 2.8 is not of type 'string'. See https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_reuse_roles.html#using-role-dependencies
+meta/main.yml:1  Returned errors will not include exact line numbers, but they will mention
+the schema name being used as a tag, like ``schema[playbook]``,
+``schema[tasks]``.
+
+This rule is not skippable and stops further processing of the file.
+
+If incorrect schema was picked, you might want to either:
+
+* move the file to standard location, so its file is detected correctly.
+* use ``kinds:`` option in linter config to help it pick correct file type.
+
+
+fqcn[action-core]: Use FQCN for builtin module actions (include_role).
+molecule/centos_7/converge.yml:5 Use `ansible.builtin.include_role` or `ansible.legacy.include_role` instead.
+
+fqcn[action-core]: Use FQCN for builtin module actions (assert).
+molecule/centos_7/verify.yml:8 Use `ansible.builtin.assert` or `ansible.legacy.assert` instead.
+
+fqcn[action-core]: Use FQCN for builtin module actions (include_role).
+molecule/centos_8/converge.yml:5 Use `ansible.builtin.include_role` or `ansible.legacy.include_role` instead.
+
+fqcn[action-core]: Use FQCN for builtin module actions (assert).
+molecule/centos_8/verify.yml:8 Use `ansible.builtin.assert` or `ansible.legacy.assert` instead.
+
+schema[inventory]: $.all None is not of type 'object'. See https://docs.ansible.com/ansible/latest/inventory_guide/intro_inventory.html
+molecule/resources/inventory/hosts.yml:1  Returned errors will not include exact line numbers, but they will mention
+the schema name being used as a tag, like ``schema[playbook]``,
+``schema[tasks]``.
+
+This rule is not skippable and stops further processing of the file.
+
+If incorrect schema was picked, you might want to either:
+
+* move the file to standard location, so its file is detected correctly.
+* use ``kinds:`` option in linter config to help it pick correct file type.
+
+
+fqcn[action-core]: Use FQCN for builtin module actions (include_role).
+molecule/resources/playbooks/converge.yml:5 Use `ansible.builtin.include_role` or `ansible.legacy.include_role` instead.
+
+fqcn[action-core]: Use FQCN for builtin module actions (include_role).
+molecule/ubuntu_focal/converge.yml:5 Use `ansible.builtin.include_role` or `ansible.legacy.include_role` instead.
+
+fqcn[action-core]: Use FQCN for builtin module actions (assert).
+molecule/ubuntu_focal/verify.yml:8 Use `ansible.builtin.assert` or `ansible.legacy.assert` instead.
+
+fqcn[action-core]: Use FQCN for builtin module actions (set_fact).
+tasks/configure/db.yml:2 Use `ansible.builtin.set_fact` or `ansible.legacy.set_fact` instead.
+
+jinja[spacing]: Jinja2 spacing could be improved: clickhouse-client -h 127.0.0.1 --port {{ clickhouse_tcp_secure_port | default(clickhouse_tcp_port) }}{{' --secure' if clickhouse_tcp_secure_port is defined else '' }} -> clickhouse-client -h 127.0.0.1 --port {{ clickhouse_tcp_secure_port | default(clickhouse_tcp_port) }}{{ ' --secure' if clickhouse_tcp_secure_port is defined else '' }} (warning)
+tasks/configure/db.yml:2 Jinja2 template rewrite recommendation: `clickhouse-client -h 127.0.0.1 --port {{ clickhouse_tcp_secure_port | default(clickhouse_tcp_port) }}{{ ' --secure' if clickhouse_tcp_secure_port is defined else '' }}`.
+
+no-free-form: Avoid using free-form when calling module actions. (set_fact)
+tasks/configure/db.yml:2 Task/Handler: Set ClickHose Connection String
+
+fqcn[action-core]: Use FQCN for builtin module actions (command).
+tasks/configure/db.yml:5 Use `ansible.builtin.command` or `ansible.legacy.command` instead.
+
+fqcn[action-core]: Use FQCN for builtin module actions (command).
+tasks/configure/db.yml:11 Use `ansible.builtin.command` or `ansible.legacy.command` instead.
+
+no-changed-when: Commands should not change things if nothing needs doing.
+tasks/configure/db.yml:11 Task/Handler: Config | Delete database config
+
+fqcn[action-core]: Use FQCN for builtin module actions (command).
+tasks/configure/db.yml:20 Use `ansible.builtin.command` or `ansible.legacy.command` instead.
+
+no-changed-when: Commands should not change things if nothing needs doing.
+tasks/configure/db.yml:20 Task/Handler: Config | Create database config
+
+fqcn[action-core]: Use FQCN for builtin module actions (template).
+tasks/configure/dict.yml:2 Use `ansible.builtin.template` or `ansible.legacy.template` instead.
+
+fqcn[action-core]: Use FQCN for builtin module actions (file).
+tasks/configure/sys.yml:2 Use `ansible.builtin.file` or `ansible.legacy.file` instead.
+
+fqcn[action-core]: Use FQCN for builtin module actions (file).
+tasks/configure/sys.yml:17 Use `ansible.builtin.file` or `ansible.legacy.file` instead.
+
+fqcn[action-core]: Use FQCN for builtin module actions (file).
+tasks/configure/sys.yml:26 Use `ansible.builtin.file` or `ansible.legacy.file` instead.
+
+fqcn[action-core]: Use FQCN for builtin module actions (template).
+tasks/configure/sys.yml:35 Use `ansible.builtin.template` or `ansible.legacy.template` instead.
+
+fqcn[action-core]: Use FQCN for builtin module actions (template).
+tasks/configure/sys.yml:45 Use `ansible.builtin.template` or `ansible.legacy.template` instead.
+
+fqcn[action-core]: Use FQCN for builtin module actions (template).
+tasks/configure/sys.yml:54 Use `ansible.builtin.template` or `ansible.legacy.template` instead.
+
+fqcn[action-core]: Use FQCN for builtin module actions (template).
+tasks/configure/sys.yml:65 Use `ansible.builtin.template` or `ansible.legacy.template` instead.
+
+fqcn[action-core]: Use FQCN for builtin module actions (template).
+tasks/configure/sys.yml:76 Use `ansible.builtin.template` or `ansible.legacy.template` instead.
+
+fqcn[action-core]: Use FQCN for builtin module actions (lineinfile).
+tasks/configure/sys.yml:87 Use `ansible.builtin.lineinfile` or `ansible.legacy.lineinfile` instead.
+
+fqcn[action-core]: Use FQCN for builtin module actions (apt_key).
+tasks/install/apt.yml:5 Use `ansible.builtin.apt_key` or `ansible.legacy.apt_key` instead.
+
+fqcn[action-core]: Use FQCN for builtin module actions (apt_repository).
+tasks/install/apt.yml:12 Use `ansible.builtin.apt_repository` or `ansible.legacy.apt_repository` instead.
+
+fqcn[action-core]: Use FQCN for builtin module actions (apt_repository).
+tasks/install/apt.yml:20 Use `ansible.builtin.apt_repository` or `ansible.legacy.apt_repository` instead.
+
+fqcn[action-core]: Use FQCN for builtin module actions (apt).
+tasks/install/apt.yml:27 Use `ansible.builtin.apt` or `ansible.legacy.apt` instead.
+
+fqcn[action-core]: Use FQCN for builtin module actions (apt).
+tasks/install/apt.yml:36 Use `ansible.builtin.apt` or `ansible.legacy.apt` instead.
+
+fqcn[action-core]: Use FQCN for builtin module actions (copy).
+tasks/install/apt.yml:45 Use `ansible.builtin.copy` or `ansible.legacy.copy` instead.
+
+risky-file-permissions: File permissions unset or incorrect.
+tasks/install/apt.yml:45 Task/Handler: Hold specified version during APT upgrade | Package installation
+
+fqcn[action-core]: Use FQCN for builtin module actions (rpm_key).
+tasks/install/dnf.yml:5 Use `ansible.builtin.rpm_key` or `ansible.legacy.rpm_key` instead.
+
+fqcn[action-core]: Use FQCN for builtin module actions (yum_repository).
+tasks/install/dnf.yml:12 Use `ansible.builtin.yum_repository` or `ansible.legacy.yum_repository` instead.
+
+fqcn[action-core]: Use FQCN for builtin module actions (dnf).
+tasks/install/dnf.yml:24 Use `ansible.builtin.dnf` or `ansible.legacy.dnf` instead.
+
+fqcn[action-core]: Use FQCN for builtin module actions (dnf).
+tasks/install/dnf.yml:32 Use `ansible.builtin.dnf` or `ansible.legacy.dnf` instead.
+
+fqcn[action-core]: Use FQCN for builtin module actions (rpm_key).
+tasks/install/yum.yml:5 Use `ansible.builtin.rpm_key` or `ansible.legacy.rpm_key` instead.
+
+fqcn[action-core]: Use FQCN for builtin module actions (yum_repository).
+tasks/install/yum.yml:12 Use `ansible.builtin.yum_repository` or `ansible.legacy.yum_repository` instead.
+
+fqcn[action-core]: Use FQCN for builtin module actions (yum).
+tasks/install/yum.yml:24 Use `ansible.builtin.yum` or `ansible.legacy.yum` instead.
+
+fqcn[action-core]: Use FQCN for builtin module actions (yum).
+tasks/install/yum.yml:32 Use `ansible.builtin.yum` or `ansible.legacy.yum` instead.
+
+fqcn[action-core]: Use FQCN for builtin module actions (include_vars).
+tasks/main.yml:3 Use `ansible.builtin.include_vars` or `ansible.legacy.include_vars` instead.
+
+fqcn[action-core]: Use FQCN for builtin module actions (include_tasks).
+tasks/main.yml:14 Use `ansible.builtin.include_tasks` or `ansible.legacy.include_tasks` instead.
+
+name[missing]: All tasks should be named.
+tasks/main.yml:14 Task/Handler: include_tasks precheck.yml
+
+fqcn[action-core]: Use FQCN for builtin module actions (include_tasks).
+tasks/main.yml:17 Use `ansible.builtin.include_tasks` or `ansible.legacy.include_tasks` instead.
+
+name[missing]: All tasks should be named.
+tasks/main.yml:17 Task/Handler: include_tasks params.yml
+
+fqcn[action-core]: Use FQCN for builtin module actions (include_tasks).
+tasks/main.yml:20 Use `ansible.builtin.include_tasks` or `ansible.legacy.include_tasks` instead.
+
+name[missing]: All tasks should be named.
+tasks/main.yml:20 Task/Handler: include_tasks file={{ lookup('first_found', params) }} apply={'tags': ['install'], '__line__': 23, '__file__': PosixPath('tasks/main.yml')}
+
+fqcn[action-core]: Use FQCN for builtin module actions (include_tasks).
+tasks/main.yml:32 Use `ansible.builtin.include_tasks` or `ansible.legacy.include_tasks` instead.
+
+name[missing]: All tasks should be named.
+tasks/main.yml:32 Task/Handler: include_tasks file=configure/sys.yml apply={'tags': ['config', 'config_sys'], '__line__': 35, '__file__': PosixPath('tasks/main.yml')}
+
+fqcn[action-core]: Use FQCN for builtin module actions (meta).
+tasks/main.yml:39 Use `ansible.builtin.meta` or `ansible.legacy.meta` instead.
+
+fqcn[action-core]: Use FQCN for builtin module actions (include_tasks).
+tasks/main.yml:42 Use `ansible.builtin.include_tasks` or `ansible.legacy.include_tasks` instead.
+
+name[missing]: All tasks should be named.
+tasks/main.yml:42 Task/Handler: include_tasks service.yml
+
+fqcn[action-core]: Use FQCN for builtin module actions (wait_for).
+tasks/main.yml:45 Use `ansible.builtin.wait_for` or `ansible.legacy.wait_for` instead.
+
+fqcn[action-core]: Use FQCN for builtin module actions (include_tasks).
+tasks/main.yml:51 Use `ansible.builtin.include_tasks` or `ansible.legacy.include_tasks` instead.
+
+name[missing]: All tasks should be named.
+tasks/main.yml:51 Task/Handler: include_tasks file=configure/db.yml apply={'tags': ['config', 'config_db'], '__line__': 54, '__file__': PosixPath('tasks/main.yml')}
+
+fqcn[action-core]: Use FQCN for builtin module actions (include_tasks).
+tasks/main.yml:58 Use `ansible.builtin.include_tasks` or `ansible.legacy.include_tasks` instead.
+
+name[missing]: All tasks should be named.
+tasks/main.yml:58 Task/Handler: include_tasks file=configure/dict.yml apply={'tags': ['config', 'config_dict'], '__line__': 61, '__file__': PosixPath('tasks/main.yml')}
+
+fqcn[action-core]: Use FQCN for builtin module actions (include_tasks).
+tasks/main.yml:65 Use `ansible.builtin.include_tasks` or `ansible.legacy.include_tasks` instead.
+
+name[missing]: All tasks should be named.
+tasks/main.yml:65 Task/Handler: include_tasks file=remove.yml apply={'tags': ['remove'], '__line__': 68, '__file__': PosixPath('tasks/main.yml')}
+
+fqcn[action-core]: Use FQCN for builtin module actions (set_fact).
+tasks/params.yml:3 Use `ansible.builtin.set_fact` or `ansible.legacy.set_fact` instead.
+
+fqcn[action-core]: Use FQCN for builtin module actions (set_fact).
+tasks/params.yml:7 Use `ansible.builtin.set_fact` or `ansible.legacy.set_fact` instead.
+
+fqcn[action-core]: Use FQCN for builtin module actions (command).
+tasks/precheck.yml:1 Use `ansible.builtin.command` or `ansible.legacy.command` instead.
+
+fqcn[action-core]: Use FQCN for builtin module actions (fail).
+tasks/precheck.yml:5 Use `ansible.builtin.fail` or `ansible.legacy.fail` instead.
+
+fqcn[action-core]: Use FQCN for builtin module actions (file).
+tasks/remove.yml:3 Use `ansible.builtin.file` or `ansible.legacy.file` instead.
+
+fqcn[action-core]: Use FQCN for builtin module actions (include_tasks).
+tasks/remove.yml:15 Use `ansible.builtin.include_tasks` or `ansible.legacy.include_tasks` instead.
+
+name[missing]: All tasks should be named.
+tasks/remove.yml:15 Task/Handler: include_tasks remove/{{ ansible_pkg_mgr }}.yml
+
+fqcn[action-core]: Use FQCN for builtin module actions (apt).
+tasks/remove/apt.yml:5 Use `ansible.builtin.apt` or `ansible.legacy.apt` instead.
+
+fqcn[action-core]: Use FQCN for builtin module actions (apt_repository).
+tasks/remove/apt.yml:12 Use `ansible.builtin.apt_repository` or `ansible.legacy.apt_repository` instead.
+
+fqcn[action-core]: Use FQCN for builtin module actions (apt_key).
+tasks/remove/apt.yml:18 Use `ansible.builtin.apt_key` or `ansible.legacy.apt_key` instead.
+
+fqcn[action-core]: Use FQCN for builtin module actions (dnf).
+tasks/remove/dnf.yml:5 Use `ansible.builtin.dnf` or `ansible.legacy.dnf` instead.
+
+fqcn[action-core]: Use FQCN for builtin module actions (yum_repository).
+tasks/remove/dnf.yml:12 Use `ansible.builtin.yum_repository` or `ansible.legacy.yum_repository` instead.
+
+fqcn[action-core]: Use FQCN for builtin module actions (rpm_key).
+tasks/remove/dnf.yml:19 Use `ansible.builtin.rpm_key` or `ansible.legacy.rpm_key` instead.
+
+fqcn[action-core]: Use FQCN for builtin module actions (yum).
+tasks/remove/yum.yml:5 Use `ansible.builtin.yum` or `ansible.legacy.yum` instead.
+
+fqcn[action-core]: Use FQCN for builtin module actions (yum_repository).
+tasks/remove/yum.yml:12 Use `ansible.builtin.yum_repository` or `ansible.legacy.yum_repository` instead.
+
+fqcn[action-core]: Use FQCN for builtin module actions (rpm_key).
+tasks/remove/yum.yml:19 Use `ansible.builtin.rpm_key` or `ansible.legacy.rpm_key` instead.
+
+fqcn[action-core]: Use FQCN for builtin module actions (service).
+tasks/service.yml:3 Use `ansible.builtin.service` or `ansible.legacy.service` instead.
+
+name[template]: Jinja templates should only be at the end of 'name'
+tasks/service.yml:3 Task/Handler: Ensure {{ clickhouse_service }} is enabled: {{ clickhouse_service_enable }} and state: {{ clickhouse_service_ensure }}
+
+jinja[spacing]: Jinja2 spacing could be improved: deb http://repo.yandex.ru/clickhouse/{{ansible_distribution_release}} stable main -> deb http://repo.yandex.ru/clickhouse/{{ ansible_distribution_release }} stable main (warning)
+vars/debian.yml:4 Jinja2 template rewrite recommendation: `deb http://repo.yandex.ru/clickhouse/{{ ansible_distribution_release }} stable main`.
+
+Read documentation for instructions on how to ignore specific rule violations.
+
+                       Rule Violation Summary
+ count tag                    profile    rule associated tags       
+     2 jinja[spacing]         basic      formatting (warning)
+     1 no-free-form           basic      syntax, risk
+     1 schema[inventory]      basic      core
+     1 schema[meta]           basic      core
+     9 name[missing]          basic      idiom
+     1 name[template]         moderate   idiom
+     1 risky-file-permissions safety     unpredictability
+     2 no-changed-when        shared     command-shell, idempotency
+    63 fqcn[action-core]      production formatting
+
+Failed: 79 failure(s), 2 warning(s) on 60 files. Last profile that met the validation criteria was 'min'.
+INFO     Inventory ~/devops-netology/08-ansible-05-testing/ansible/roles/ansible-clickhouse/molecule/centos_7/../resources/inventory/hosts.yml linked to /home/timur/.cache/molecule/ansible-clickhouse/centos_7/inventory/hosts
+INFO     Inventory ~/devops-netology/08-ansible-05-testing/ansible/roles/ansible-clickhouse/molecule/centos_7/../resources/inventory/group_vars/ linked to /home/timur/.cache/molecule/ansible-clickhouse/centos_7/inventory/group_vars
+INFO     Inventory ~/devops-netology/08-ansible-05-testing/ansible/roles/ansible-clickhouse/molecule/centos_7/../resources/inventory/host_vars/ linked to /home/timur/.cache/molecule/ansible-clickhouse/centos_7/inventory/host_vars
+INFO     Running centos_7 > cleanup
+WARNING  Skipping, cleanup playbook not configured.
+INFO     Inventory ~/devops-netology/08-ansible-05-testing/ansible/roles/ansible-clickhouse/molecule/centos_7/../resources/inventory/hosts.yml linked to /home/timur/.cache/molecule/ansible-clickhouse/centos_7/inventory/hosts
+INFO     Inventory ~/devops-netology/08-ansible-05-testing/ansible/roles/ansible-clickhouse/molecule/centos_7/../resources/inventory/group_vars/ linked to /home/timur/.cache/molecule/ansible-clickhouse/centos_7/inventory/group_vars
+INFO     Inventory ~/devops-netology/08-ansible-05-testing/ansible/roles/ansible-clickhouse/molecule/centos_7/../resources/inventory/host_vars/ linked to /home/timur/.cache/molecule/ansible-clickhouse/centos_7/inventory/host_vars
+INFO     Running centos_7 > destroy
+INFO     Sanity checks: 'docker'
+
+PLAY [Destroy] *****************************************************************
+
+TASK [Destroy molecule instance(s)] ********************************************
+changed: [localhost] => (item=centos_7)
+
+TASK [Wait for instance(s) deletion to complete] *******************************
+ok: [localhost] => (item=centos_7)
+
+TASK [Delete docker networks(s)] ***********************************************
+skipping: [localhost]
+
+PLAY RECAP *********************************************************************
+localhost                  : ok=2    changed=1    unreachable=0    failed=0    skipped=1    rescued=0    ignored=0
+
+INFO     Inventory ~/devops-netology/08-ansible-05-testing/ansible/roles/ansible-clickhouse/molecule/centos_7/../resources/inventory/hosts.yml linked to /home/timur/.cache/molecule/ansible-clickhouse/centos_7/inventory/hosts
+INFO     Inventory ~/devops-netology/08-ansible-05-testing/ansible/roles/ansible-clickhouse/molecule/centos_7/../resources/inventory/group_vars/ linked to /home/timur/.cache/molecule/ansible-clickhouse/centos_7/inventory/group_vars
+INFO     Inventory ~/devops-netology/08-ansible-05-testing/ansible/roles/ansible-clickhouse/molecule/centos_7/../resources/inventory/host_vars/ linked to /home/timur/.cache/molecule/ansible-clickhouse/centos_7/inventory/host_vars
+INFO     Running centos_7 > syntax
+
+playbook: ~/devops-netology/08-ansible-05-testing/ansible/roles/ansible-clickhouse/molecule/resources/playbooks/converge.yml 
+INFO     Inventory ~/devops-netology/08-ansible-05-testing/ansible/roles/ansible-clickhouse/molecule/centos_7/../resources/inventory/hosts.yml linked to /home/timur/.cache/molecule/ansible-clickhouse/centos_7/inventory/hosts
+INFO     Inventory ~/devops-netology/08-ansible-05-testing/ansible/roles/ansible-clickhouse/molecule/centos_7/../resources/inventory/group_vars/ linked to /home/timur/.cache/molecule/ansible-clickhouse/centos_7/inventory/group_vars
+INFO     Inventory ~/devops-netology/08-ansible-05-testing/ansible/roles/ansible-clickhouse/molecule/centos_7/../resources/inventory/host_vars/ linked to /home/timur/.cache/molecule/ansible-clickhouse/centos_7/inventory/host_vars
+INFO     Running centos_7 > create
+
+PLAY [Create] ******************************************************************
+
+TASK [Log into a Docker registry] **********************************************
+skipping: [localhost] => (item=None) 
+skipping: [localhost]
+
+TASK [Check presence of custom Dockerfiles] ************************************
+ok: [localhost] => (item={'capabilities': ['SYS_ADMIN'], 'command': '/usr/sbin/init', 'dockerfile': '../resources/Dockerfile.j2', 'env': {'ANSIBLE_USER': 'ansible', 'DEPLOY_GROUP': 'deployer', 'SUDO_GROUP': 'wheel', 'container': 'docker'}, 'image': 'centos:7', 'name': 'centos_7', 'privileged': True, 'tmpfs': ['/run', '/tmp'], 'volumes': ['/sys/fs/cgroup:/sys/fs/cgroup']})
+
+TASK [Create Dockerfiles from image names] *************************************
+changed: [localhost] => (item={'capabilities': ['SYS_ADMIN'], 'command': '/usr/sbin/init', 'dockerfile': '../resources/Dockerfile.j2', 'env': {'ANSIBLE_USER': 'ansible', 'DEPLOY_GROUP': 'deployer', 'SUDO_GROUP': 'wheel', 'container': 'docker'}, 'image': 'centos:7', 'name': 'centos_7', 'privileged': True, 'tmpfs': ['/run', '/tmp'], 'volumes': ['/sys/fs/cgroup:/sys/fs/cgroup']})
+
+TASK [Discover local Docker images] ********************************************
+ok: [localhost] => (item={'diff': [], 'dest': '/home/timur/.cache/molecule/ansible-clickhouse/centos_7/Dockerfile_centos_7', 'src': '/home/timur/.ansible/tmp/ansible-tmp-1701550141.331584-1980-178661354187470/source', 'md5sum': 'e90d08cd34f49a5f8a41a07de1348618', 'checksum': '4b70768619482424811f2977aa277a5acf2b13a1', 'changed': True, 'uid': 1000, 'gid': 1000, 'owner': 'timur', 'group': 'timur', 'mode': '0600', 'state': 'file', 'size': 2199, 'invocation': {'module_args': {'src': '/home/timur/.ansible/tmp/ansible-tmp-1701550141.331584-1980-178661354187470/source', 'dest': '/home/timur/.cache/molecule/ansible-clickhouse/centos_7/Dockerfile_centos_7', 'mode': '0600', 'follow': False, '_original_basename': 'Dockerfile.j2', 'checksum': '4b70768619482424811f2977aa277a5acf2b13a1', 'backup': False, 'force': True, 'unsafe_writes': False, 'content': None, 'validate': None, 'directory_mode': None, 'remote_src': None, 'local_follow': None, 'owner': None, 'group': None, 'seuser': None, 'serole': None, 'selevel': None, 'setype': None, 'attributes': None}}, 'failed': False, 'item': {'capabilities': ['SYS_ADMIN'], 'command': '/usr/sbin/init', 'dockerfile': '../resources/Dockerfile.j2', 'env': {'ANSIBLE_USER': 'ansible', 'DEPLOY_GROUP': 'deployer', 'SUDO_GROUP': 'wheel', 'container': 'docker'}, 'image': 'centos:7', 'name': 'centos_7', 'privileged': True, 'tmpfs': ['/run', '/tmp'], 'volumes': ['/sys/fs/cgroup:/sys/fs/cgroup']}, 'ansible_loop_var': 'item', 'i': 0, 'ansible_index_var': 'i'})
+
+TASK [Build an Ansible compatible image (new)] *********************************
+ok: [localhost] => (item=molecule_local/centos:7)
+
+TASK [Create docker network(s)] ************************************************
+skipping: [localhost]
+
+TASK [Determine the CMD directives] ********************************************
+ok: [localhost] => (item={'capabilities': ['SYS_ADMIN'], 'command': '/usr/sbin/init', 'dockerfile': '../resources/Dockerfile.j2', 'env': {'ANSIBLE_USER': 'ansible', 'DEPLOY_GROUP': 'deployer', 'SUDO_GROUP': 'wheel', 'container': 'docker'}, 'image': 'centos:7', 'name': 'centos_7', 'privileged': True, 'tmpfs': ['/run', '/tmp'], 'volumes': ['/sys/fs/cgroup:/sys/fs/cgroup']})
+
+TASK [Create molecule instance(s)] *********************************************
+changed: [localhost] => (item=centos_7)
+
+TASK [Wait for instance(s) creation to complete] *******************************
+changed: [localhost] => (item={'failed': 0, 'started': 1, 'finished': 0, 'ansible_job_id': 'j480455027119.2109', 'results_file': '/home/timur/.ansible_async/j480455027119.2109', 'changed': True, 'item': {'capabilities': ['SYS_ADMIN'], 'command': '/usr/sbin/init', 'dockerfile': '../resources/Dockerfile.j2', 'env': {'ANSIBLE_USER': 'ansible', 'DEPLOY_GROUP': 'deployer', 'SUDO_GROUP': 'wheel', 'container': 'docker'}, 'image': 'centos:7', 'name': 'centos_7', 'privileged': True, 'tmpfs': ['/run', '/tmp'], 'volumes': ['/sys/fs/cgroup:/sys/fs/cgroup']}, 'ansible_loop_var': 'item'})
+
+PLAY RECAP *********************************************************************
+localhost                  : ok=7    changed=3    unreachable=0    failed=0    skipped=2    rescued=0    ignored=0
+
+INFO     Inventory ~/devops-netology/08-ansible-05-testing/ansible/roles/ansible-clickhouse/molecule/centos_7/../resources/inventory/hosts.yml linked to /home/timur/.cache/molecule/ansible-clickhouse/centos_7/inventory/hosts
+INFO     Inventory ~/devops-netology/08-ansible-05-testing/ansible/roles/ansible-clickhouse/molecule/centos_7/../resources/inventory/group_vars/ linked to /home/timur/.cache/molecule/ansible-clickhouse/centos_7/inventory/group_vars
+INFO     Inventory ~/devops-netology/08-ansible-05-testing/ansible/roles/ansible-clickhouse/molecule/centos_7/../resources/inventory/host_vars/ linked to /home/timur/.cache/molecule/ansible-clickhouse/centos_7/inventory/host_vars
+INFO     Running centos_7 > prepare
+WARNING  Skipping, prepare playbook not configured.
+INFO     Inventory ~/devops-netology/08-ansible-05-testing/ansible/roles/ansible-clickhouse/molecule/centos_7/../resources/inventory/hosts.yml linked to /home/timur/.cache/molecule/ansible-clickhouse/centos_7/inventory/hosts
+INFO     Inventory ~/devops-netology/08-ansible-05-testing/ansible/roles/ansible-clickhouse/molecule/centos_7/../resources/inventory/group_vars/ linked to /home/timur/.cache/molecule/ansible-clickhouse/centos_7/inventory/group_vars
+INFO     Inventory ~/devops-netology/08-ansible-05-testing/ansible/roles/ansible-clickhouse/molecule/centos_7/../resources/inventory/host_vars/ linked to /home/timur/.cache/molecule/ansible-clickhouse/centos_7/inventory/host_vars
+INFO     Running centos_7 > converge
+
+PLAY [Converge] ****************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [centos_7]
+
+TASK [Apply Clickhouse Role] ***************************************************
+
+TASK [ansible-clickhouse : Include OS Family Specific Variables] ***************
+ok: [centos_7]
+
+TASK [ansible-clickhouse : include_tasks] **************************************
+included: ~/devops-netology/08-ansible-05-testing/ansible/roles/ansible-clickhouse/tasks/precheck.yml for centos_7
+
+TASK [ansible-clickhouse : Requirements check | Checking sse4_2 support] *******
+ok: [centos_7]
+
+TASK [ansible-clickhouse : Requirements check | Not supported distribution && release] ***
+skipping: [centos_7]
+
+TASK [ansible-clickhouse : include_tasks] **************************************
+included: ~/devops-netology/08-ansible-05-testing/ansible/roles/ansible-clickhouse/tasks/params.yml for centos_7
+
+TASK [ansible-clickhouse : Set clickhouse_service_enable] **********************
+ok: [centos_7]
+
+TASK [ansible-clickhouse : Set clickhouse_service_ensure] **********************
+ok: [centos_7]
+
+TASK [ansible-clickhouse : include_tasks] **************************************
+included: ~/devops-netology/08-ansible-05-testing/ansible/roles/ansible-clickhouse/tasks/install/yum.yml for centos_7
+
+TASK [ansible-clickhouse : Install by YUM | Ensure clickhouse repo GPG key imported] ***
+changed: [centos_7]
+
+TASK [ansible-clickhouse : Install by YUM | Ensure clickhouse repo installed] ***
+--- before: /etc/yum.repos.d/clickhouse.repo
++++ after: /etc/yum.repos.d/clickhouse.repo
+@@ -0,0 +1,7 @@
++[clickhouse]
++baseurl = https://repo.clickhouse.tech/rpm/stable/x86_64/
++enabled = 1
++gpgcheck = 1
++gpgkey = https://repo.clickhouse.tech//CLICKHOUSE-KEY.GPG
++name = Clickhouse repo
++
+
+changed: [centos_7]
+
+TASK [ansible-clickhouse : Install by YUM | Ensure clickhouse package installed (latest)] ***
+fatal: [centos_7]: FAILED! => {"changed": false, "msg": "https://repo.clickhouse.tech/rpm/stable/x86_64/repodata/repomd.xml: [Errno 14] HTTPS Error 403 - Forbidden\nTrying other mirror.\nTo address this issue please refer to the below wiki article\n\nhttps://wiki.centos.org/yum-errors\n\nIf above article doesn't help to resolve this issue please use https://bugs.centos.org/.\n\n\n\n One of the configured repositories failed (Clickhouse repo),\n and yum doesn't have enough cached data to continue. At this point the only\n safe thing yum can do is fail. There are a few ways to work \"fix\" this:\n\n     1. Contact the upstream for the repository and get them to fix the problem.\n\n     2. Reconfigure the baseurl/etc. for the repository, to point to a working\n        upstream. This is most often useful if you are using a newer\n        distribution release than is supported by the repository (and the\n        packages for the previous distribution release still work).\n\n     3. Run the command with the repository temporarily disabled\n            yum --disablerepo=clickhouse ...\n\n     4. Disable the repository permanently, so yum won't use it by default. Yum\n        will then just ignore the repository until you permanently enable it\n        again or use --enablerepo for temporary usage:\n\n            yum-config-manager --disable clickhouse\n        or\n            subscription-manager repos --disable=clickhouse\n\n     5. Configure the failing repository to be skipped, if it is unavailable.\n        Note that yum will try to contact the repo. when it runs most commands,\n        so will have to try and fail each time (and thus. yum will be be much\n        slower). If it is a very temporary problem though, this is often a nice\n        compromise:\n\n            yum-config-manager --save --setopt=clickhouse.skip_if_unavailable=true\n\nfailure: repodata/repomd.xml from clickhouse: [Errno 256] No more mirrors to try.\nhttps://repo.clickhouse.tech/rpm/stable/x86_64/repodata/repomd.xml: [Errno 14] HTTPS Error 403 - Forbidden\n", "rc": 1, "results": []}
+
+PLAY RECAP *********************************************************************
+centos_7                   : ok=10   changed=2    unreachable=0    failed=1    skipped=1    rescued=0    ignored=0
+
+CRITICAL Ansible return code was 2, command was: ['ansible-playbook', '-D', '--inventory', '/home/timur/.cache/molecule/ansible-clickhouse/centos_7/inventory', '--skip-tags', 'molecule-notest,notest', '~/devops-netology/08-ansible-05-testing/ansible/roles/ansible-clickhouse/molecule/resources/playbooks/converge.yml']
+WARNING  An error occurred during the test sequence action: 'converge'. Cleaning up.
+INFO     Inventory ~/devops-netology/08-ansible-05-testing/ansible/roles/ansible-clickhouse/molecule/centos_7/../resources/inventory/hosts.yml linked to /home/timur/.cache/molecule/ansible-clickhouse/centos_7/inventory/hosts
+INFO     Inventory ~/devops-netology/08-ansible-05-testing/ansible/roles/ansible-clickhouse/molecule/centos_7/../resources/inventory/group_vars/ linked to /home/timur/.cache/molecule/ansible-clickhouse/centos_7/inventory/group_vars
+INFO     Inventory ~/devops-netology/08-ansible-05-testing/ansible/roles/ansible-clickhouse/molecule/centos_7/../resources/inventory/host_vars/ linked to /home/timur/.cache/molecule/ansible-clickhouse/centos_7/inventory/host_vars
+INFO     Running centos_7 > cleanup
+WARNING  Skipping, cleanup playbook not configured.
+INFO     Inventory ~/devops-netology/08-ansible-05-testing/ansible/roles/ansible-clickhouse/molecule/centos_7/../resources/inventory/hosts.yml linked to /home/timur/.cache/molecule/ansible-clickhouse/centos_7/inventory/hosts
+INFO     Inventory ~/devops-netology/08-ansible-05-testing/ansible/roles/ansible-clickhouse/molecule/centos_7/../resources/inventory/group_vars/ linked to /home/timur/.cache/molecule/ansible-clickhouse/centos_7/inventory/group_vars
+INFO     Inventory ~/devops-netology/08-ansible-05-testing/ansible/roles/ansible-clickhouse/molecule/centos_7/../resources/inventory/host_vars/ linked to /home/timur/.cache/molecule/ansible-clickhouse/centos_7/inventory/host_vars
+INFO     Running centos_7 > destroy
+
+PLAY [Destroy] *****************************************************************
+
+TASK [Destroy molecule instance(s)] ********************************************
+changed: [localhost] => (item=centos_7)
+
+TASK [Wait for instance(s) deletion to complete] *******************************
+changed: [localhost] => (item=centos_7)
+
+TASK [Delete docker networks(s)] ***********************************************
+skipping: [localhost]
+
+PLAY RECAP *********************************************************************
+localhost                  : ok=2    changed=2    unreachable=0    failed=0    skipped=1    rescued=0    ignored=0
+
+INFO     Pruning extra files from scenario ephemeral directory

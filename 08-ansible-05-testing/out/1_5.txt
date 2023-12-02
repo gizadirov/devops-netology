@@ -1,0 +1,23 @@
+INFO     Running Ansible Verifier
+
+PLAY [Verify] ******************************************************************
+
+TASK [Include default vars] ****************************************************
+ok: [centos_8]
+
+TASK [Execute vector] **********************************************************
+ok: [centos_8]
+
+TASK [Check valid config] ******************************************************
+changed: [centos_8]
+
+TASK [Assert vector is installed] **********************************************
+ok: [centos_8] => {
+    "changed": false,
+    "msg": "All assertions passed"
+}
+
+PLAY RECAP *********************************************************************
+centos_8                   : ok=4    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+
+INFO     Verifier completed successfully.

@@ -1,0 +1,197 @@
+(.venv) timur@LAPTOP-D947D6IL:~/devops-netology/08-ansible-05-testing/ansible/roles/vector-role$ molecule test -s ubuntu_latest
+INFO     ubuntu_latest scenario test matrix: dependency, lint, cleanup, destroy, syntax, create, prepare, converge, idempotence, side_effect, verify, cleanup, destroy
+INFO     Performing prerun...
+INFO     Set ANSIBLE_LIBRARY=/home/timur/.cache/ansible-compat/f5bcd7/modules:/home/timur/.ansible/plugins/modules:/usr/share/ansible/plugins/modules
+INFO     Set ANSIBLE_COLLECTIONS_PATH=/home/timur/.cache/ansible-compat/f5bcd7/collections:/home/timur/.ansible/collections:/usr/share/ansible/collections
+INFO     Set ANSIBLE_ROLES_PATH=/home/timur/.cache/ansible-compat/f5bcd7/roles:/home/timur/.ansible/roles:/usr/share/ansible/roles:/etc/ansible/roles
+INFO     Inventory ~/devops-netology/08-ansible-05-testing/ansible/roles/vector-role/molecule/ubuntu_latest/../resources/inventory/hosts.yml linked to /home/timur/.cache/molecule/vector-role/ubuntu_latest/inventory/hosts
+INFO     Inventory ~/devops-netology/08-ansible-05-testing/ansible/roles/vector-role/molecule/ubuntu_latest/../resources/inventory/group_vars/ linked to /home/timur/.cache/molecule/vector-role/ubuntu_latest/inventory/group_vars
+INFO     Inventory ~/devops-netology/08-ansible-05-testing/ansible/roles/vector-role/molecule/ubuntu_latest/../resources/inventory/host_vars/ linked to /home/timur/.cache/molecule/vector-role/ubuntu_latest/inventory/host_vars
+INFO     Running ubuntu_latest > dependency
+WARNING  Skipping, missing the requirements file.
+WARNING  Skipping, missing the requirements file.
+INFO     Inventory ~/devops-netology/08-ansible-05-testing/ansible/roles/vector-role/molecule/ubuntu_latest/../resources/inventory/hosts.yml linked to /home/timur/.cache/molecule/vector-role/ubuntu_latest/inventory/hosts
+INFO     Inventory ~/devops-netology/08-ansible-05-testing/ansible/roles/vector-role/molecule/ubuntu_latest/../resources/inventory/group_vars/ linked to /home/timur/.cache/molecule/vector-role/ubuntu_latest/inventory/group_vars
+INFO     Inventory ~/devops-netology/08-ansible-05-testing/ansible/roles/vector-role/molecule/ubuntu_latest/../resources/inventory/host_vars/ linked to /home/timur/.cache/molecule/vector-role/ubuntu_latest/inventory/host_vars
+INFO     Running ubuntu_latest > lint
+COMMAND: yamllint .
+ansible-lint
+flake8
+
+ERROR    Computed fully qualified role name of timurkhakimov.vector-role does not follow current galaxy requirements.
+Please edit meta/main.yml and assure we can correctly determine full role name:
+
+galaxy_info:
+role_name: my_name  # if absent directory name hosting role is used instead
+namespace: my_galaxy_namespace  # if absent, author is used instead
+
+Namespace: https://galaxy.ansible.com/docs/contributing/namespaces.html#galaxy-namespace-limitations
+Role: https://galaxy.ansible.com/docs/contributing/creating_role.html#role-names
+
+As an alternative, you can add 'role-name' to either skip_list or warn_list.
+
+Computed fully qualified role name of timurkhakimov.vector-role does not follow current galaxy requirements.
+Please edit meta/main.yml and assure we can correctly determine full role name:
+
+galaxy_info:
+role_name: my_name  # if absent directory name hosting role is used instead
+namespace: my_galaxy_namespace  # if absent, author is used instead
+
+Namespace: https://galaxy.ansible.com/docs/contributing/namespaces.html#galaxy-namespace-limitations
+Role: https://galaxy.ansible.com/docs/contributing/creating_role.html#role-names
+
+As an alternative, you can add 'role-name' to either skip_list or warn_list.
+
+INFO     Inventory ~/devops-netology/08-ansible-05-testing/ansible/roles/vector-role/molecule/ubuntu_latest/../resources/inventory/hosts.yml linked to /home/timur/.cache/molecule/vector-role/ubuntu_latest/inventory/hosts
+INFO     Inventory ~/devops-netology/08-ansible-05-testing/ansible/roles/vector-role/molecule/ubuntu_latest/../resources/inventory/group_vars/ linked to /home/timur/.cache/molecule/vector-role/ubuntu_latest/inventory/group_vars
+INFO     Inventory ~/devops-netology/08-ansible-05-testing/ansible/roles/vector-role/molecule/ubuntu_latest/../resources/inventory/host_vars/ linked to /home/timur/.cache/molecule/vector-role/ubuntu_latest/inventory/host_vars
+INFO     Running ubuntu_latest > cleanup
+WARNING  Skipping, cleanup playbook not configured.
+INFO     Inventory ~/devops-netology/08-ansible-05-testing/ansible/roles/vector-role/molecule/ubuntu_latest/../resources/inventory/hosts.yml linked to /home/timur/.cache/molecule/vector-role/ubuntu_latest/inventory/hosts
+INFO     Inventory ~/devops-netology/08-ansible-05-testing/ansible/roles/vector-role/molecule/ubuntu_latest/../resources/inventory/group_vars/ linked to /home/timur/.cache/molecule/vector-role/ubuntu_latest/inventory/group_vars
+INFO     Inventory ~/devops-netology/08-ansible-05-testing/ansible/roles/vector-role/molecule/ubuntu_latest/../resources/inventory/host_vars/ linked to /home/timur/.cache/molecule/vector-role/ubuntu_latest/inventory/host_vars
+INFO     Running ubuntu_latest > destroy
+INFO     Sanity checks: 'docker'
+
+PLAY [Destroy] *****************************************************************
+
+TASK [Destroy molecule instance(s)] ********************************************
+changed: [localhost] => (item=ubuntu_latest)
+
+TASK [Wait for instance(s) deletion to complete] *******************************
+ok: [localhost] => (item=ubuntu_latest)
+
+TASK [Delete docker networks(s)] ***********************************************
+skipping: [localhost]
+
+PLAY RECAP *********************************************************************
+localhost                  : ok=2    changed=1    unreachable=0    failed=0    skipped=1    rescued=0    ignored=0
+
+INFO     Inventory ~/devops-netology/08-ansible-05-testing/ansible/roles/vector-role/molecule/ubuntu_latest/../resources/inventory/hosts.yml linked to /home/timur/.cache/molecule/vector-role/ubuntu_latest/inventory/hosts
+INFO     Inventory ~/devops-netology/08-ansible-05-testing/ansible/roles/vector-role/molecule/ubuntu_latest/../resources/inventory/group_vars/ linked to /home/timur/.cache/molecule/vector-role/ubuntu_latest/inventory/group_vars
+INFO     Inventory ~/devops-netology/08-ansible-05-testing/ansible/roles/vector-role/molecule/ubuntu_latest/../resources/inventory/host_vars/ linked to /home/timur/.cache/molecule/vector-role/ubuntu_latest/inventory/host_vars
+INFO     Running ubuntu_latest > syntax
+ansible-playbook [core 2.15.6]
+  config file = /home/timur/.cache/molecule/vector-role/ubuntu_latest/ansible.cfg
+  configured module search path = ['~/devops-netology/08-ansible-05-testing/.venv/lib/python3.9/site-packages/molecule/provisioner/ansible/plugins/modules', '/home/timur/.cache/molecule/vector-role/ubuntu_latest/library', '~/devops-netology/08-ansible-05-testing/ansible/roles/vector-role/library', '/home/timur/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = ~/devops-netology/08-ansible-05-testing/.venv/lib/python3.9/site-packages/ansible
+  ansible collection location = /home/timur/.ansible/collections:/usr/share/ansible/collections
+  executable location = ~/devops-netology/08-ansible-05-testing/.venv/bin/ansible-playbook
+  python version = 3.9.2 (default, Feb 28 2021, 17:03:44) [GCC 10.2.1 20210110] (~/devops-netology/08-ansible-05-testing/.venv/bin/python3)
+  jinja version = 3.1.2
+  libyaml = True
+Using /home/timur/.cache/molecule/vector-role/ubuntu_latest/ansible.cfg as config file
+1 plays in ~/devops-netology/08-ansible-05-testing/ansible/roles/vector-role/molecule/resources/playbooks/converge.yml       
+
+playbook: ~/devops-netology/08-ansible-05-testing/ansible/roles/vector-role/molecule/resources/playbooks/converge.yml        
+INFO     Inventory ~/devops-netology/08-ansible-05-testing/ansible/roles/vector-role/molecule/ubuntu_latest/../resources/inventory/hosts.yml linked to /home/timur/.cache/molecule/vector-role/ubuntu_latest/inventory/hosts
+INFO     Inventory ~/devops-netology/08-ansible-05-testing/ansible/roles/vector-role/molecule/ubuntu_latest/../resources/inventory/group_vars/ linked to /home/timur/.cache/molecule/vector-role/ubuntu_latest/inventory/group_vars
+INFO     Inventory ~/devops-netology/08-ansible-05-testing/ansible/roles/vector-role/molecule/ubuntu_latest/../resources/inventory/host_vars/ linked to /home/timur/.cache/molecule/vector-role/ubuntu_latest/inventory/host_vars
+INFO     Running ubuntu_latest > create
+
+PLAY [Create] ******************************************************************
+
+TASK [Log into a Docker registry] **********************************************
+skipping: [localhost] => (item=None) 
+skipping: [localhost]
+
+TASK [Check presence of custom Dockerfiles] ************************************
+ok: [localhost] => (item={'capabilities': ['SYS_ADMIN'], 'command': '/sbin/init', 'dockerfile': '../resources/Dockerfile.j2', 'env': {'ANSIBLE_USER': 'ansible', 'DEPLOY_GROUP': 'deployer', 'SUDO_GROUP': 'sudo', 'container': 'docker'}, 'image': 'ubuntu:latest', 'name': 'ubuntu_latest', 'privileged': True, 'tmpfs': ['/run', '/tmp'], 'volumes': ['/sys/fs/cgroup:/sys/fs/cgroup']})
+
+TASK [Create Dockerfiles from image names] *************************************
+changed: [localhost] => (item={'capabilities': ['SYS_ADMIN'], 'command': '/sbin/init', 'dockerfile': '../resources/Dockerfile.j2', 'env': {'ANSIBLE_USER': 'ansible', 'DEPLOY_GROUP': 'deployer', 'SUDO_GROUP': 'sudo', 'container': 'docker'}, 'image': 'ubuntu:latest', 'name': 'ubuntu_latest', 'privileged': True, 'tmpfs': ['/run', '/tmp'], 'volumes': ['/sys/fs/cgroup:/sys/fs/cgroup']})
+
+TASK [Discover local Docker images] ********************************************
+ok: [localhost] => (item={'diff': [], 'dest': '/home/timur/.cache/molecule/vector-role/ubuntu_latest/Dockerfile_ubuntu_latest', 'src': '/home/timur/.ansible/tmp/ansible-tmp-1701552991.855423-12879-200614397458659/source', 'md5sum': '494f081df668e1c263575fc6845e4a2e', 'checksum': 'f2a55a6b663585869c406d23ec64a6edf4c5a7aa', 'changed': True, 'uid': 1000, 'gid': 1000, 'owner': 'timur', 'group': 'timur', 'mode': '0600', 'state': 'file', 'size': 2199, 'invocation': {'module_args': {'src': '/home/timur/.ansible/tmp/ansible-tmp-1701552991.855423-12879-200614397458659/source', 'dest': '/home/timur/.cache/molecule/vector-role/ubuntu_latest/Dockerfile_ubuntu_latest', 'mode': '0600', 'follow': False, '_original_basename': 'Dockerfile.j2', 'checksum': 'f2a55a6b663585869c406d23ec64a6edf4c5a7aa', 'backup': False, 'force': True, 'unsafe_writes': False, 'content': None, 'validate': None, 'directory_mode': None, 'remote_src': None, 'local_follow': None, 'owner': None, 'group': None, 'seuser': None, 'serole': None, 'selevel': None, 'setype': None, 'attributes': None}}, 'failed': False, 'item': {'capabilities': ['SYS_ADMIN'], 'command': '/sbin/init', 'dockerfile': '../resources/Dockerfile.j2', 'env': {'ANSIBLE_USER': 'ansible', 'DEPLOY_GROUP': 'deployer', 'SUDO_GROUP': 'sudo', 'container': 'docker'}, 'image': 'ubuntu:latest', 'name': 'ubuntu_latest', 'privileged': True, 'tmpfs': ['/run', '/tmp'], 'volumes': ['/sys/fs/cgroup:/sys/fs/cgroup']}, 'ansible_loop_var': 'item', 'i': 0, 'ansible_index_var': 'i'})
+
+TASK [Build an Ansible compatible image (new)] *********************************
+changed: [localhost] => (item=molecule_local/ubuntu:latest)
+
+TASK [Create docker network(s)] ************************************************
+skipping: [localhost]
+
+TASK [Determine the CMD directives] ********************************************
+ok: [localhost] => (item={'capabilities': ['SYS_ADMIN'], 'command': '/sbin/init', 'dockerfile': '../resources/Dockerfile.j2', 'env': {'ANSIBLE_USER': 'ansible', 'DEPLOY_GROUP': 'deployer', 'SUDO_GROUP': 'sudo', 'container': 'docker'}, 'image': 'ubuntu:latest', 'name': 'ubuntu_latest', 'privileged': True, 'tmpfs': ['/run', '/tmp'], 'volumes': ['/sys/fs/cgroup:/sys/fs/cgroup']})
+
+TASK [Create molecule instance(s)] *********************************************
+changed: [localhost] => (item=ubuntu_latest)
+
+TASK [Wait for instance(s) creation to complete] *******************************
+changed: [localhost] => (item={'failed': 0, 'started': 1, 'finished': 0, 'ansible_job_id': 'j960382865489.13009', 'results_file': '/home/timur/.ansible_async/j960382865489.13009', 'changed': True, 'item': {'capabilities': ['SYS_ADMIN'], 'command': '/sbin/init', 'dockerfile': '../resources/Dockerfile.j2', 'env': {'ANSIBLE_USER': 'ansible', 'DEPLOY_GROUP': 'deployer', 'SUDO_GROUP': 'sudo', 'container': 'docker'}, 'image': 'ubuntu:latest', 'name': 'ubuntu_latest', 'privileged': True, 'tmpfs': ['/run', '/tmp'], 'volumes': ['/sys/fs/cgroup:/sys/fs/cgroup']}, 'ansible_loop_var': 'item'})
+
+PLAY RECAP *********************************************************************
+localhost                  : ok=7    changed=4    unreachable=0    failed=0    skipped=2    rescued=0    ignored=0
+
+INFO     Inventory ~/devops-netology/08-ansible-05-testing/ansible/roles/vector-role/molecule/ubuntu_latest/../resources/inventory/hosts.yml linked to /home/timur/.cache/molecule/vector-role/ubuntu_latest/inventory/hosts
+INFO     Inventory ~/devops-netology/08-ansible-05-testing/ansible/roles/vector-role/molecule/ubuntu_latest/../resources/inventory/group_vars/ linked to /home/timur/.cache/molecule/vector-role/ubuntu_latest/inventory/group_vars
+INFO     Inventory ~/devops-netology/08-ansible-05-testing/ansible/roles/vector-role/molecule/ubuntu_latest/../resources/inventory/host_vars/ linked to /home/timur/.cache/molecule/vector-role/ubuntu_latest/inventory/host_vars
+INFO     Running ubuntu_latest > prepare
+WARNING  Skipping, prepare playbook not configured.
+INFO     Inventory ~/devops-netology/08-ansible-05-testing/ansible/roles/vector-role/molecule/ubuntu_latest/../resources/inventory/hosts.yml linked to /home/timur/.cache/molecule/vector-role/ubuntu_latest/inventory/hosts
+INFO     Inventory ~/devops-netology/08-ansible-05-testing/ansible/roles/vector-role/molecule/ubuntu_latest/../resources/inventory/group_vars/ linked to /home/timur/.cache/molecule/vector-role/ubuntu_latest/inventory/group_vars
+INFO     Inventory ~/devops-netology/08-ansible-05-testing/ansible/roles/vector-role/molecule/ubuntu_latest/../resources/inventory/host_vars/ linked to /home/timur/.cache/molecule/vector-role/ubuntu_latest/inventory/host_vars
+INFO     Running ubuntu_latest > converge
+ansible-playbook [core 2.15.6]
+  config file = /home/timur/.cache/molecule/vector-role/ubuntu_latest/ansible.cfg
+  configured module search path = ['~/devops-netology/08-ansible-05-testing/.venv/lib/python3.9/site-packages/molecule/provisioner/ansible/plugins/modules', '/home/timur/.cache/molecule/vector-role/ubuntu_latest/library', '~/devops-netology/08-ansible-05-testing/ansible/roles/vector-role/library', '/home/timur/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = ~/devops-netology/08-ansible-05-testing/.venv/lib/python3.9/site-packages/ansible
+  ansible collection location = /home/timur/.ansible/collections:/usr/share/ansible/collections
+  executable location = ~/devops-netology/08-ansible-05-testing/.venv/bin/ansible-playbook
+  python version = 3.9.2 (default, Feb 28 2021, 17:03:44) [GCC 10.2.1 20210110] (~/devops-netology/08-ansible-05-testing/.venv/bin/python3)
+  jinja version = 3.1.2
+  libyaml = True
+Using /home/timur/.cache/molecule/vector-role/ubuntu_latest/ansible.cfg as config file
+Skipping callback 'default', as we already have a stdout callback.
+Skipping callback 'minimal', as we already have a stdout callback.
+Skipping callback 'oneline', as we already have a stdout callback.
+
+PLAYBOOK: converge.yml *********************************************************
+1 plays in ~/devops-netology/08-ansible-05-testing/ansible/roles/vector-role/molecule/resources/playbooks/converge.yml       
+
+PLAY [Converge] ****************************************************************
+
+TASK [Gathering Facts] *********************************************************
+task path: ~/devops-netology/08-ansible-05-testing/ansible/roles/vector-role/molecule/resources/playbooks/converge.yml:2     
+ok: [ubuntu_latest]
+
+TASK [Apply Vector Role] *******************************************************
+task path: ~/devops-netology/08-ansible-05-testing/ansible/roles/vector-role/molecule/resources/playbooks/converge.yml:5     
+
+TASK [vector-role : Vector | Download packages] ********************************
+task path: ~/devops-netology/08-ansible-05-testing/ansible/roles/vector-role/tasks/main.yml:3
+changed: [ubuntu_latest] => {"changed": true, "checksum_dest": null, "checksum_src": "f7b443dce2213ac24944d4bd7faa1926a0b8ef23", "dest": "/tmp/vector-0.22.1-1.x86_64.rpm", "elapsed": 7, "gid": 999, "group": "ansible", "md5sum": "ac2ec8cf138c599d7444d1b85215c80c", "mode": "0644", "msg": "OK (52417559 bytes)", "owner": "ansible", "size": 52417559, "src": "/home/ansible/.ansible/tmp/ansible-tmp-1701553125.1295335-13300-279724987124418/tmpc0tfz6px", "state": "file", "status_code": 200, "uid": 1000, "url": "https://packages.timber.io/vector/0.22.1/vector-0.22.1-1.x86_64.rpm"}
+
+TASK [vector-role : Vector | Install packages] *********************************
+task path: ~/devops-netology/08-ansible-05-testing/ansible/roles/vector-role/tasks/main.yml:7
+fatal: [ubuntu_latest]: FAILED! => {"ansible_facts": {"pkg_mgr": "apt"}, "changed": false, "msg": ["Could not detect which major revision of yum is in use, which is required to determine module backend.", "You should manually specify use_backend to tell the module whether to use the yum (yum3) or dnf (yum4) backend})"]}
+
+PLAY RECAP *********************************************************************
+ubuntu_latest              : ok=2    changed=1    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0
+
+CRITICAL Ansible return code was 2, command was: ['ansible-playbook', '-D', '--inventory', '/home/timur/.cache/molecule/vector-role/ubuntu_latest/inventory', '--skip-tags', 'molecule-notest,notest', '-vv', '~/devops-netology/08-ansible-05-testing/ansible/roles/vector-role/molecule/resources/playbooks/converge.yml']
+WARNING  An error occurred during the test sequence action: 'converge'. Cleaning up.
+INFO     Inventory ~/devops-netology/08-ansible-05-testing/ansible/roles/vector-role/molecule/ubuntu_latest/../resources/inventory/hosts.yml linked to /home/timur/.cache/molecule/vector-role/ubuntu_latest/inventory/hosts
+INFO     Inventory ~/devops-netology/08-ansible-05-testing/ansible/roles/vector-role/molecule/ubuntu_latest/../resources/inventory/group_vars/ linked to /home/timur/.cache/molecule/vector-role/ubuntu_latest/inventory/group_vars
+INFO     Inventory ~/devops-netology/08-ansible-05-testing/ansible/roles/vector-role/molecule/ubuntu_latest/../resources/inventory/host_vars/ linked to /home/timur/.cache/molecule/vector-role/ubuntu_latest/inventory/host_vars
+INFO     Running ubuntu_latest > cleanup
+WARNING  Skipping, cleanup playbook not configured.
+INFO     Inventory ~/devops-netology/08-ansible-05-testing/ansible/roles/vector-role/molecule/ubuntu_latest/../resources/inventory/hosts.yml linked to /home/timur/.cache/molecule/vector-role/ubuntu_latest/inventory/hosts
+INFO     Inventory ~/devops-netology/08-ansible-05-testing/ansible/roles/vector-role/molecule/ubuntu_latest/../resources/inventory/group_vars/ linked to /home/timur/.cache/molecule/vector-role/ubuntu_latest/inventory/group_vars
+INFO     Inventory ~/devops-netology/08-ansible-05-testing/ansible/roles/vector-role/molecule/ubuntu_latest/../resources/inventory/host_vars/ linked to /home/timur/.cache/molecule/vector-role/ubuntu_latest/inventory/host_vars
+INFO     Running ubuntu_latest > destroy
+
+PLAY [Destroy] *****************************************************************
+
+TASK [Destroy molecule instance(s)] ********************************************
+changed: [localhost] => (item=ubuntu_latest)
+
+TASK [Wait for instance(s) deletion to complete] *******************************
+changed: [localhost] => (item=ubuntu_latest)
+
+TASK [Delete docker networks(s)] ***********************************************
+skipping: [localhost]
+
+PLAY RECAP *********************************************************************
+localhost                  : ok=2    changed=2    unreachable=0    failed=0    skipped=1    rescued=0    ignored=0
+
+INFO     Pruning extra files from scenario ephemeral directory

@@ -1,0 +1,257 @@
+(.venv) timur@LAPTOP-D947D6IL:~/devops-netology/08-ansible-05-testing/ansible/roles/vector-role$ molecule test -s centos_8
+INFO     centos_8 scenario test matrix: dependency, lint, cleanup, destroy, syntax, create, prepare, converge, idempotence, side_effect, verify, cleanup, destroy
+INFO     Performing prerun...
+INFO     Set ANSIBLE_LIBRARY=/home/timur/.cache/ansible-compat/f5bcd7/modules:/home/timur/.ansible/plugins/modules:/usr/share/ansible/plugins/modules
+INFO     Set ANSIBLE_COLLECTIONS_PATH=/home/timur/.cache/ansible-compat/f5bcd7/collections:/home/timur/.ansible/collections:/usr/share/ansible/collections
+INFO     Set ANSIBLE_ROLES_PATH=/home/timur/.cache/ansible-compat/f5bcd7/roles:/home/timur/.ansible/roles:/usr/share/ansible/roles:/etc/ansible/roles
+INFO     Inventory ~/devops-netology/08-ansible-05-testing/ansible/roles/vector-role/molecule/centos_8/../resources/inventory/hosts.yml linked to /home/timur/.cache/molecule/vector-role/centos_8/inventory/hosts
+INFO     Inventory ~/devops-netology/08-ansible-05-testing/ansible/roles/vector-role/molecule/centos_8/../resources/inventory/group_vars/ linked to /home/timur/.cache/molecule/vector-role/centos_8/inventory/group_vars
+INFO     Inventory ~/devops-netology/08-ansible-05-testing/ansible/roles/vector-role/molecule/centos_8/../resources/inventory/host_vars/ linked to /home/timur/.cache/molecule/vector-role/centos_8/inventory/host_vars
+INFO     Running centos_8 > dependency
+WARNING  Skipping, missing the requirements file.
+WARNING  Skipping, missing the requirements file.
+INFO     Inventory ~/devops-netology/08-ansible-05-testing/ansible/roles/vector-role/molecule/centos_8/../resources/inventory/hosts.yml linked to /home/timur/.cache/molecule/vector-role/centos_8/inventory/hosts
+INFO     Inventory ~/devops-netology/08-ansible-05-testing/ansible/roles/vector-role/molecule/centos_8/../resources/inventory/group_vars/ linked to /home/timur/.cache/molecule/vector-role/centos_8/inventory/group_vars
+INFO     Inventory ~/devops-netology/08-ansible-05-testing/ansible/roles/vector-role/molecule/centos_8/../resources/inventory/host_vars/ linked to /home/timur/.cache/molecule/vector-role/centos_8/inventory/host_vars
+INFO     Running centos_8 > lint
+COMMAND: yamllint .
+ansible-lint
+flake8
+
+ERROR    Computed fully qualified role name of timurkhakimov.vector-role does not follow current galaxy requirements.
+Please edit meta/main.yml and assure we can correctly determine full role name:
+
+galaxy_info:
+role_name: my_name  # if absent directory name hosting role is used instead
+namespace: my_galaxy_namespace  # if absent, author is used instead
+
+Namespace: https://galaxy.ansible.com/docs/contributing/namespaces.html#galaxy-namespace-limitations
+Role: https://galaxy.ansible.com/docs/contributing/creating_role.html#role-names
+
+As an alternative, you can add 'role-name' to either skip_list or warn_list.
+
+Computed fully qualified role name of timurkhakimov.vector-role does not follow current galaxy requirements.
+Please edit meta/main.yml and assure we can correctly determine full role name:
+
+galaxy_info:
+role_name: my_name  # if absent directory name hosting role is used instead
+namespace: my_galaxy_namespace  # if absent, author is used instead
+
+Namespace: https://galaxy.ansible.com/docs/contributing/namespaces.html#galaxy-namespace-limitations
+Role: https://galaxy.ansible.com/docs/contributing/creating_role.html#role-names
+
+As an alternative, you can add 'role-name' to either skip_list or warn_list.
+
+INFO     Inventory ~/devops-netology/08-ansible-05-testing/ansible/roles/vector-role/molecule/centos_8/../resources/inventory/hosts.yml linked to /home/timur/.cache/molecule/vector-role/centos_8/inventory/hosts
+INFO     Inventory ~/devops-netology/08-ansible-05-testing/ansible/roles/vector-role/molecule/centos_8/../resources/inventory/group_vars/ linked to /home/timur/.cache/molecule/vector-role/centos_8/inventory/group_vars
+INFO     Inventory ~/devops-netology/08-ansible-05-testing/ansible/roles/vector-role/molecule/centos_8/../resources/inventory/host_vars/ linked to /home/timur/.cache/molecule/vector-role/centos_8/inventory/host_vars
+INFO     Running centos_8 > cleanup
+WARNING  Skipping, cleanup playbook not configured.
+INFO     Inventory ~/devops-netology/08-ansible-05-testing/ansible/roles/vector-role/molecule/centos_8/../resources/inventory/hosts.yml linked to /home/timur/.cache/molecule/vector-role/centos_8/inventory/hosts
+INFO     Inventory ~/devops-netology/08-ansible-05-testing/ansible/roles/vector-role/molecule/centos_8/../resources/inventory/group_vars/ linked to /home/timur/.cache/molecule/vector-role/centos_8/inventory/group_vars
+INFO     Inventory ~/devops-netology/08-ansible-05-testing/ansible/roles/vector-role/molecule/centos_8/../resources/inventory/host_vars/ linked to /home/timur/.cache/molecule/vector-role/centos_8/inventory/host_vars
+INFO     Running centos_8 > destroy
+INFO     Sanity checks: 'docker'
+
+PLAY [Destroy] *****************************************************************
+
+TASK [Destroy molecule instance(s)] ********************************************
+changed: [localhost] => (item=centos_8)
+
+TASK [Wait for instance(s) deletion to complete] *******************************
+ok: [localhost] => (item=centos_8)
+
+TASK [Delete docker networks(s)] ***********************************************
+skipping: [localhost]
+
+PLAY RECAP *********************************************************************
+localhost                  : ok=2    changed=1    unreachable=0    failed=0    skipped=1    rescued=0    ignored=0
+
+INFO     Inventory ~/devops-netology/08-ansible-05-testing/ansible/roles/vector-role/molecule/centos_8/../resources/inventory/hosts.yml linked to /home/timur/.cache/molecule/vector-role/centos_8/inventory/hosts
+INFO     Inventory ~/devops-netology/08-ansible-05-testing/ansible/roles/vector-role/molecule/centos_8/../resources/inventory/group_vars/ linked to /home/timur/.cache/molecule/vector-role/centos_8/inventory/group_vars
+INFO     Inventory ~/devops-netology/08-ansible-05-testing/ansible/roles/vector-role/molecule/centos_8/../resources/inventory/host_vars/ linked to /home/timur/.cache/molecule/vector-role/centos_8/inventory/host_vars
+INFO     Running centos_8 > syntax
+
+playbook: ~/devops-netology/08-ansible-05-testing/ansible/roles/vector-role/molecule/resources/playbooks/converge.yml        
+INFO     Inventory ~/devops-netology/08-ansible-05-testing/ansible/roles/vector-role/molecule/centos_8/../resources/inventory/hosts.yml linked to /home/timur/.cache/molecule/vector-role/centos_8/inventory/hosts
+INFO     Inventory ~/devops-netology/08-ansible-05-testing/ansible/roles/vector-role/molecule/centos_8/../resources/inventory/group_vars/ linked to /home/timur/.cache/molecule/vector-role/centos_8/inventory/group_vars
+INFO     Inventory ~/devops-netology/08-ansible-05-testing/ansible/roles/vector-role/molecule/centos_8/../resources/inventory/host_vars/ linked to /home/timur/.cache/molecule/vector-role/centos_8/inventory/host_vars
+INFO     Running centos_8 > create
+
+PLAY [Create] ******************************************************************
+
+TASK [Log into a Docker registry] **********************************************
+skipping: [localhost] => (item=None) 
+skipping: [localhost]
+
+TASK [Check presence of custom Dockerfiles] ************************************
+ok: [localhost] => (item={'capabilities': ['SYS_ADMIN'], 'command': '/usr/sbin/init', 'dockerfile': '../resources/Dockerfile.j2', 'env': {'ANSIBLE_USER': 'ansible', 'DEPLOY_GROUP': 'deployer', 'SUDO_GROUP': 'wheel', 'container': 'docker'}, 'image': 'dokken/centos-8', 'name': 'centos_8', 'privileged': True, 'tmpfs': ['/run', '/tmp'], 'volumes': ['/sys/fs/cgroup:/sys/fs/cgroup']})
+
+TASK [Create Dockerfiles from image names] *************************************
+changed: [localhost] => (item={'capabilities': ['SYS_ADMIN'], 'command': '/usr/sbin/init', 'dockerfile': '../resources/Dockerfile.j2', 'env': {'ANSIBLE_USER': 'ansible', 'DEPLOY_GROUP': 'deployer', 'SUDO_GROUP': 'wheel', 'container': 'docker'}, 'image': 'dokken/centos-8', 'name': 'centos_8', 'privileged': True, 'tmpfs': ['/run', '/tmp'], 'volumes': ['/sys/fs/cgroup:/sys/fs/cgroup']})
+
+TASK [Discover local Docker images] ********************************************
+ok: [localhost] => (item={'diff': [], 'dest': '/home/timur/.cache/molecule/vector-role/centos_8/Dockerfile_dokken_centos_8', 'src': '/home/timur/.ansible/tmp/ansible-tmp-1701552633.002403-9592-185432745870591/source', 'md5sum': '66640750a819766243c4d206eec14a1c', 'checksum': '2d67e63e1ac19c221fa55fc4e6c39bcbf4f32433', 'changed': True, 'uid': 1000, 'gid': 1000, 'owner': 'timur', 'group': 'timur', 'mode': '0600', 'state': 'file', 'size': 2206, 'invocation': {'module_args': {'src': '/home/timur/.ansible/tmp/ansible-tmp-1701552633.002403-9592-185432745870591/source', 'dest': '/home/timur/.cache/molecule/vector-role/centos_8/Dockerfile_dokken_centos_8', 'mode': '0600', 'follow': False, '_original_basename': 'Dockerfile.j2', 'checksum': '2d67e63e1ac19c221fa55fc4e6c39bcbf4f32433', 'backup': False, 'force': True, 'unsafe_writes': False, 'content': None, 'validate': None, 'directory_mode': None, 'remote_src': None, 'local_follow': None, 'owner': None, 'group': None, 'seuser': None, 'serole': None, 'selevel': None, 'setype': None, 'attributes': None}}, 'failed': False, 'item': {'capabilities': ['SYS_ADMIN'], 'command': '/usr/sbin/init', 'dockerfile': '../resources/Dockerfile.j2', 'env': {'ANSIBLE_USER': 'ansible', 'DEPLOY_GROUP': 'deployer', 'SUDO_GROUP': 'wheel', 'container': 'docker'}, 'image': 'dokken/centos-8', 'name': 'centos_8', 'privileged': True, 'tmpfs': ['/run', '/tmp'], 'volumes': ['/sys/fs/cgroup:/sys/fs/cgroup']}, 'ansible_loop_var': 'item', 'i': 0, 'ansible_index_var': 'i'})
+
+TASK [Build an Ansible compatible image (new)] *********************************
+ok: [localhost] => (item=molecule_local/dokken/centos-8)
+
+TASK [Create docker network(s)] ************************************************
+skipping: [localhost]
+
+TASK [Determine the CMD directives] ********************************************
+ok: [localhost] => (item={'capabilities': ['SYS_ADMIN'], 'command': '/usr/sbin/init', 'dockerfile': '../resources/Dockerfile.j2', 'env': {'ANSIBLE_USER': 'ansible', 'DEPLOY_GROUP': 'deployer', 'SUDO_GROUP': 'wheel', 'container': 'docker'}, 'image': 'dokken/centos-8', 'name': 'centos_8', 'privileged': True, 'tmpfs': ['/run', '/tmp'], 'volumes': ['/sys/fs/cgroup:/sys/fs/cgroup']})
+
+TASK [Create molecule instance(s)] *********************************************
+changed: [localhost] => (item=centos_8)
+
+TASK [Wait for instance(s) creation to complete] *******************************
+changed: [localhost] => (item={'failed': 0, 'started': 1, 'finished': 0, 'ansible_job_id': 'j863964633517.9719', 'results_file': '/home/timur/.ansible_async/j863964633517.9719', 'changed': True, 'item': {'capabilities': ['SYS_ADMIN'], 'command': '/usr/sbin/init', 'dockerfile': '../resources/Dockerfile.j2', 'env': {'ANSIBLE_USER': 'ansible', 'DEPLOY_GROUP': 'deployer', 'SUDO_GROUP': 'wheel', 'container': 'docker'}, 'image': 'dokken/centos-8', 'name': 'centos_8', 'privileged': True, 'tmpfs': ['/run', '/tmp'], 'volumes': ['/sys/fs/cgroup:/sys/fs/cgroup']}, 'ansible_loop_var': 'item'})
+
+PLAY RECAP *********************************************************************
+localhost                  : ok=7    changed=3    unreachable=0    failed=0    skipped=2    rescued=0    ignored=0
+
+INFO     Inventory ~/devops-netology/08-ansible-05-testing/ansible/roles/vector-role/molecule/centos_8/../resources/inventory/hosts.yml linked to /home/timur/.cache/molecule/vector-role/centos_8/inventory/hosts
+INFO     Inventory ~/devops-netology/08-ansible-05-testing/ansible/roles/vector-role/molecule/centos_8/../resources/inventory/group_vars/ linked to /home/timur/.cache/molecule/vector-role/centos_8/inventory/group_vars
+INFO     Inventory ~/devops-netology/08-ansible-05-testing/ansible/roles/vector-role/molecule/centos_8/../resources/inventory/host_vars/ linked to /home/timur/.cache/molecule/vector-role/centos_8/inventory/host_vars
+INFO     Running centos_8 > prepare
+WARNING  Skipping, prepare playbook not configured.
+INFO     Inventory ~/devops-netology/08-ansible-05-testing/ansible/roles/vector-role/molecule/centos_8/../resources/inventory/hosts.yml linked to /home/timur/.cache/molecule/vector-role/centos_8/inventory/hosts
+INFO     Inventory ~/devops-netology/08-ansible-05-testing/ansible/roles/vector-role/molecule/centos_8/../resources/inventory/group_vars/ linked to /home/timur/.cache/molecule/vector-role/centos_8/inventory/group_vars
+INFO     Inventory ~/devops-netology/08-ansible-05-testing/ansible/roles/vector-role/molecule/centos_8/../resources/inventory/host_vars/ linked to /home/timur/.cache/molecule/vector-role/centos_8/inventory/host_vars
+INFO     Running centos_8 > converge
+
+PLAY [Converge] ****************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [centos_8]
+
+TASK [Apply Vector Role] *******************************************************
+
+TASK [vector-role : Vector | Download packages] ********************************
+changed: [centos_8]
+
+TASK [vector-role : Vector | Install packages] *********************************
+changed: [centos_8]
+
+TASK [vector-role : Vector | Apply template] ***********************************
+--- before
++++ after: /home/timur/.ansible/tmp/ansible-local-9760dja68wsn/tmpgy25tnce/vector.yml.j2
+@@ -0,0 +1,15 @@
++sinks:
++    to_clickhouse:
++        compression: gzip
++        database: logs
++        endpoint: http://clickhouse-1:8123
++        healthcheck: true
++        inputs:
++        - demo_logs
++        skip_unknown_fields: true
++        table: vector_table
++        type: clickhouse
++sources:
++    demo_logs:
++        format: syslog
++        type: demo_logs
+
+changed: [centos_8]
+
+TASK [vector-role : Vector | change systemd unit] ******************************
+--- before: /usr/lib/systemd/system/vector.service
++++ after: /home/timur/.ansible/tmp/ansible-local-9760dja68wsn/tmp6bm4wyc9/vector.service.j2
+@@ -5,15 +5,10 @@
+ Requires=network-online.target
+
+ [Service]
+-User=vector
+-Group=vector
+-ExecStartPre=/usr/bin/vector validate
+-ExecStart=/usr/bin/vector
+-ExecReload=/usr/bin/vector validate
++User=ansible
++Group=ansible
++ExecStart=/usr/bin/vector --config /etc/vector/vector.yml
+ ExecReload=/bin/kill -HUP $MAINPID
+-Restart=no
+-AmbientCapabilities=CAP_NET_BIND_SERVICE
+-EnvironmentFile=-/etc/default/vector
+-
++Restart=always
+ [Install]
+-WantedBy=multi-user.target
++WantedBy=multi-user.target
+\ No newline at end of file
+
+changed: [centos_8]
+
+RUNNING HANDLER [vector-role : Start Vector service] ***************************
+changed: [centos_8]
+
+PLAY RECAP *********************************************************************
+centos_8                   : ok=6    changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+
+INFO     Inventory ~/devops-netology/08-ansible-05-testing/ansible/roles/vector-role/molecule/centos_8/../resources/inventory/hosts.yml linked to /home/timur/.cache/molecule/vector-role/centos_8/inventory/hosts
+INFO     Inventory ~/devops-netology/08-ansible-05-testing/ansible/roles/vector-role/molecule/centos_8/../resources/inventory/group_vars/ linked to /home/timur/.cache/molecule/vector-role/centos_8/inventory/group_vars
+INFO     Inventory ~/devops-netology/08-ansible-05-testing/ansible/roles/vector-role/molecule/centos_8/../resources/inventory/host_vars/ linked to /home/timur/.cache/molecule/vector-role/centos_8/inventory/host_vars
+INFO     Running centos_8 > idempotence
+
+PLAY [Converge] ****************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [centos_8]
+
+TASK [Apply Vector Role] *******************************************************
+
+TASK [vector-role : Vector | Download packages] ********************************
+ok: [centos_8]
+
+TASK [vector-role : Vector | Install packages] *********************************
+ok: [centos_8]
+
+TASK [vector-role : Vector | Apply template] ***********************************
+ok: [centos_8]
+
+TASK [vector-role : Vector | change systemd unit] ******************************
+ok: [centos_8]
+
+PLAY RECAP *********************************************************************
+centos_8                   : ok=5    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+
+INFO     Idempotence completed successfully.
+INFO     Inventory ~/devops-netology/08-ansible-05-testing/ansible/roles/vector-role/molecule/centos_8/../resources/inventory/hosts.yml linked to /home/timur/.cache/molecule/vector-role/centos_8/inventory/hosts
+INFO     Inventory ~/devops-netology/08-ansible-05-testing/ansible/roles/vector-role/molecule/centos_8/../resources/inventory/group_vars/ linked to /home/timur/.cache/molecule/vector-role/centos_8/inventory/group_vars
+INFO     Inventory ~/devops-netology/08-ansible-05-testing/ansible/roles/vector-role/molecule/centos_8/../resources/inventory/host_vars/ linked to /home/timur/.cache/molecule/vector-role/centos_8/inventory/host_vars
+INFO     Running centos_8 > side_effect
+WARNING  Skipping, side effect playbook not configured.
+INFO     Inventory ~/devops-netology/08-ansible-05-testing/ansible/roles/vector-role/molecule/centos_8/../resources/inventory/hosts.yml linked to /home/timur/.cache/molecule/vector-role/centos_8/inventory/hosts
+INFO     Inventory ~/devops-netology/08-ansible-05-testing/ansible/roles/vector-role/molecule/centos_8/../resources/inventory/group_vars/ linked to /home/timur/.cache/molecule/vector-role/centos_8/inventory/group_vars
+INFO     Inventory ~/devops-netology/08-ansible-05-testing/ansible/roles/vector-role/molecule/centos_8/../resources/inventory/host_vars/ linked to /home/timur/.cache/molecule/vector-role/centos_8/inventory/host_vars
+INFO     Running centos_8 > verify
+INFO     Running Ansible Verifier
+WARNING  Skipping, verify playbook not configured.
+INFO     Verifier completed successfully.
+INFO     Inventory ~/devops-netology/08-ansible-05-testing/ansible/roles/vector-role/molecule/centos_8/../resources/inventory/hosts.yml linked to /home/timur/.cache/molecule/vector-role/centos_8/inventory/hosts
+INFO     Inventory ~/devops-netology/08-ansible-05-testing/ansible/roles/vector-role/molecule/centos_8/../resources/inventory/group_vars/ linked to /home/timur/.cache/molecule/vector-role/centos_8/inventory/group_vars
+INFO     Inventory ~/devops-netology/08-ansible-05-testing/ansible/roles/vector-role/molecule/centos_8/../resources/inventory/host_vars/ linked to /home/timur/.cache/molecule/vector-role/centos_8/inventory/host_vars
+INFO     Running centos_8 > cleanup
+WARNING  Skipping, cleanup playbook not configured.
+INFO     Inventory ~/devops-netology/08-ansible-05-testing/ansible/roles/vector-role/molecule/centos_8/../resources/inventory/hosts.yml linked to /home/timur/.cache/molecule/vector-role/centos_8/inventory/hosts
+INFO     Inventory ~/devops-netology/08-ansible-05-testing/ansible/roles/vector-role/molecule/centos_8/../resources/inventory/group_vars/ linked to /home/timur/.cache/molecule/vector-role/centos_8/inventory/group_vars
+INFO     Inventory ~/devops-netology/08-ansible-05-testing/ansible/roles/vector-role/molecule/centos_8/../resources/inventory/host_vars/ linked to /home/timur/.cache/molecule/vector-role/centos_8/inventory/host_vars
+INFO     Running centos_8 > destroy
+
+PLAY [Destroy] *****************************************************************
+
+TASK [Destroy molecule instance(s)] ********************************************
+changed: [localhost] => (item=centos_8)
+
+TASK [Wait for instance(s) deletion to complete] *******************************
+changed: [localhost] => (item=centos_8)
+
+TASK [Delete docker networks(s)] ***********************************************
+skipping: [localhost]
+
+PLAY RECAP *********************************************************************
+localhost                  : ok=2    changed=2    unreachable=0    failed=0    skipped=1    rescued=0    ignored=0
+
+INFO     Pruning extra files from scenario ephemeral directory
