@@ -15,7 +15,7 @@
 
   - name: Check valid config
     become: true
-    command: vector validate {{ vector_config_dir }}/vector.yml
+    command: vector validate --no-environment {{ vector_config_dir }}/vector.yml
     register: vector_config_valid
 
   - name: Assert vector is installed
