@@ -1,0 +1,9 @@
+---
+# defaults file for vector-role
+vector_version: 0.22.1
+vector_config_dir: "/etc/vector"
+vector_config:
+  sources:
+    demo_logs:
+      type: demo_logs
+      format: syslog
