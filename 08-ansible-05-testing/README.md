@@ -25,7 +25,7 @@
 6. Добавьте новый тег на коммит с рабочим сценарием в соответствии с семантическим версионированием.
 
     **Ответ:**  
-[COMMIT](https://github.com/gizadirov/devops-netology/tree/vector-role/08-ansible-05-testing)
+[COMMIT](https://github.com/gizadirov/devops-netology/tree/molecule/08-ansible-05-testing)
 
 ### Tox
 

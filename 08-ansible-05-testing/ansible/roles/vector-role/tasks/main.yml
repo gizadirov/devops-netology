@@ -1,14 +1,57 @@
 ---
 # tasks file for vector-role
-- name: Vector | Download packages
+- name: Vector | Download packages (RPM)
   ansible.builtin.get_url:
-    url: "{{ vector_url }}"
+    url: "{{ vector_url_rpm }}"
     dest: "/tmp/vector-{{ vector_version }}-1.x86_64.rpm"
-- name: Vector | Install packages
+    mode: 0600
+  when: ansible_os_family == 'RedHat'
+
+- name: Vector | Download packages (DEB)
+  ansible.builtin.get_url:
+    url: "{{ vector_url_deb }}"
+    dest: "/tmp/vector_{{ vector_version }}-1_amd64.deb"
+    mode: 0600
+  when: ansible_os_family == 'Debian'
+
+- name: Vector | YUM repo fix 1
+  ansible.builtin.find:
+    paths: "/etc/yum.repos.d/"
+    patterns: "CentOS-*"
+  register: repos
+  when: ansible_os_family == 'RedHat'
+
+- name: Vector | YUM repo fix 2
+  ansible.builtin.replace:
+    path: "{{ item.path }}"
+    regexp: 'mirrorlist'
+    replace: '#mirrorlist'
+  with_items: "{{ repos.files }}"
+  when: ansible_os_family == 'RedHat'
+
+- name: Vector | YUM repo fix 3
+  ansible.builtin.replace:
+    path: "{{ item.path }}"
+    regexp: '#baseurl=http://mirror.centos.org'
+    replace: 'baseurl=http://vault.centos.org'
+  with_items: "{{ repos.files }}"
+  when: ansible_os_family == 'RedHat'
+
+- name: Vector | Install packages (Yum)
   become: true
   ansible.builtin.yum:
     name: "/tmp/vector-{{ vector_version }}-1.x86_64.rpm"
+    use_backend: dnf
     disable_gpg_check: true
+  when: ansible_os_family == 'RedHat'
+
+- name: Vector | Install packages (Apt)
+  become: true
+  ansible.builtin.apt:
+    deb: "/tmp/vector_{{ vector_version }}-1_amd64.deb"
+    allow_unauthenticated: true
+  when: ansible_os_family == 'Debian'
+
 - name: Vector | Apply template
   become: true
   ansible.builtin.template:
@@ -18,7 +61,8 @@
     owner: "{{ ansible_user_id }}"
     group: "{{ ansible_user_gid }}"
     validate: vector validate --no-environment --config-yaml %s
-- name: Vector | change systemd unit
+
+- name: Vector | Change systemd unit RedHat
   become: true
   ansible.builtin.template:
     src: vector.service.j2
@@ -27,4 +71,20 @@
     owner: "{{ ansible_user_id }}"
     group: "{{ ansible_user_gid }}"
     backup: true
+  when: ansible_os_family == 'RedHat'
+
+- name: Vector | Change systemd unit Ubuntu
+  become: true
+  ansible.builtin.template:
+    src: vector.service.j2
+    dest: /lib/systemd/system/vector.service
+    mode: "0644"
+    owner: "{{ ansible_user_id }}"
+    group: "{{ ansible_user_gid }}"
+    backup: true
+  when: ansible_os_family == 'Debian'
+  
+- name: Vector | Notify start
+  ansible.builtin.debug:
+    msg:
   notify: Start Vector service
