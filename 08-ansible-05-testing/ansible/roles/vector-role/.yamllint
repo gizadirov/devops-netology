@@ -31,6 +31,3 @@ rules:
     type: unix
   trailing-spaces: disable
   truthy: disable
-  meta-no-info: disable
-skip_list:  # or 'skip_list' to silence them completely                                                                                                                              
-  - meta-no-info  # meta/main.yml should contain relevant info
