@@ -1,0 +1,27 @@
+pipeline {
+    agent {
+        label 'ansible'
+    }
+    stages {
+        stage('Get code') {
+            steps {
+                sh(returnStdout: true, script: '''#!/bin/bash
+                    if [ ! -d devops-netology ];then
+                       git clone https://github.com/gizadirov/devops-netology
+                    fi
+                '''.stripIndent())
+                dir('devops-netology') {
+                    sh 'git fetch --tags'
+                    sh 'git checkout tags/molecule'
+                }
+            }
+        }
+        stage('Molecule test') {
+            steps {
+                dir('devops-netology/08-ansible-05-testing/ansible/roles/vector-role') {
+                   sh 'molecule test'
+                }
+            }
+        }
+    }
+}
