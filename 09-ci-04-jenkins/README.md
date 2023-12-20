@@ -1,12 +1,5 @@
 # Домашнее задание к занятию 10 «Jenkins»
 
-## Подготовка к выполнению
-
-1. Создать два VM: для jenkins-master и jenkins-agent.
-2. Установить Jenkins при помощи playbook.
-3. Запустить и проверить работоспособность.
-4. Сделать первоначальную настройку.
-
 ## Основная часть
 
 1. Сделать Freestyle Job, который будет запускать `molecule test` из любого вашего репозитория с ролью.
@@ -18,15 +11,64 @@
 7. Проверить работоспособность, исправить ошибки, исправленный Pipeline вложить в репозиторий в файл `ScriptedJenkinsfile`.
 8. Отправить ссылку на репозиторий с ролью и Declarative Pipeline и Scripted Pipeline.
 
-## Необязательная часть
+## Ответ
 
-1. Создать скрипт на groovy, который будет собирать все Job, завершившиеся хотя бы раз неуспешно. Добавить скрипт в репозиторий с решением и названием `AllJobFailure.groovy`.
-2. Создать Scripted Pipeline так, чтобы он мог сначала запустить через Yandex Cloud CLI необходимое количество инстансов, прописать их в инвентори плейбука и после этого запускать плейбук. Мы должны при нажатии кнопки получить готовую к использованию систему.
+Declarative Pipeline
+```
+pipeline {
+    agent {
+        label 'ansible'
+    }
+    stages {
+        stage('Get code') {
+            steps {
+                sh(returnStdout: true, script: '''#!/bin/bash
+                    if [ ! -d devops-netology ];then
+                       git clone https://github.com/gizadirov/devops-netology
+                    fi
+                '''.stripIndent())
+                dir('devops-netology') {
+                    sh 'git fetch --tags'
+                    sh 'git checkout tags/molecule'
+                }
+            }
+        }
+        stage('Molecule test') {
+            steps {
+                dir('devops-netology/08-ansible-05-testing/ansible/roles/vector-role') {
+                   sh 'molecule test'
+                }
+            }
+        }
+    }
+}
+```
 
----
-
-### Как оформить решение задания
-
-Выполненное домашнее задание пришлите в виде ссылки на .md-файл в вашем репозитории.
-
----
+Scripted Pipeline
+```
+node("linux"){
+    stage("Git checkout"){
+        git credentialsId: 'e9bccc69-aad5-46c9-9281-a4de40ad5eb7', url: 'git@github.com:gizadirov/example-playbook.git'
+    }
+    stage("Sample define secret_check"){
+        def status = sh(returnStatus: true, script: 'sudo echo')
+        if (status == 0) {
+            secret_check=true
+        }
+    }
+    stage("Run playbook"){
+        if (secret_check){
+            if (params.prod_run) {
+                sh 'ansible-playbook site.yml -i inventory/prod.yml'
+            }
+            else
+            {
+                sh 'ansible-playbook site.yml -i inventory/prod.yml --check --diff'
+            }
+        }
+        else{
+            echo 'need more action'
+        }
+    }
+}
+```
