@@ -12,8 +12,12 @@
 8. Отправить ссылку на репозиторий с ролью и Declarative Pipeline и Scripted Pipeline.
 
 ## Ответ
+<img src="img/a.png" width="1024" />  
 
-Declarative Pipeline
+### Declarative Pipeline  
+
+<img src="img/d.png" width="800" />  
+
 ```
 pipeline {
     agent {
@@ -44,7 +48,10 @@ pipeline {
 }
 ```
 
-Scripted Pipeline
+### Scripted Pipeline  
+
+<img src="img/s.png" width="800" />  
+
 ```
 node("linux"){
     stage("Git checkout"){
