@@ -1,5 +1,5 @@
 # Домашнее задание к занятию 12 «GitLab»
-tELqyKMDOVsdJX3UDNzSvKwnXj8UwykR12iFEbc4W1c=
+
 
 ## Основная часть
 
